@@ -8,13 +8,17 @@ import { CampaignPerformanceChart } from "@/components/dashboard/CampaignPerform
 import { AudienceGrowthChart } from "@/components/dashboard/AudienceGrowthChart";
 import { RecentCampaigns } from "@/components/dashboard/RecentCampaigns";
 import { MessageTypesChart } from "@/components/dashboard/MessageTypesChart";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Home = () => {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-gray-50">
+      <div className="flex min-h-screen w-full bg-gray-50 dark:bg-gray-900">
         <AppSidebar />
         <div className="flex-1 p-6 lg:p-8 space-y-6 lg:space-y-8 overflow-auto">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Header Section */}
           <DashboardHeader />
 
