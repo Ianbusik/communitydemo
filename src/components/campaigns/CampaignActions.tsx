@@ -7,9 +7,19 @@ import { AIPromoBuilderModal } from "./AIPromoBuilderModal";
 export const CampaignActions: React.FC = () => {
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
 
-  const handleAISend = (message: string) => {
-    console.log("AI Promo sent:", message);
+  const handleAISend = (message: string, audience: string, images: string[]) => {
+    console.log("AI Promo sent:", {
+      message,
+      audience,
+      images,
+      timestamp: new Date().toISOString()
+    });
     // Here you would integrate with your existing campaign sending logic
+    // This would typically involve:
+    // 1. Creating the campaign in your backend
+    // 2. Uploading the selected images
+    // 3. Sending to the selected audience
+    // 4. Tracking campaign metrics
   };
 
   const handleNewCampaign = () => {
