@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
@@ -16,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const Campaigns = () => {
-  useDocumentTitle("Campaigns - Manage your marketing campaigns");
+  useDocumentTitle();
   const [selectedCampaign, setSelectedCampaign] = useState(null);
 
   // Mock campaign data
