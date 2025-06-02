@@ -9,15 +9,29 @@ import { AudienceGrowthChart } from "@/components/dashboard/AudienceGrowthChart"
 import { RecentCampaigns } from "@/components/dashboard/RecentCampaigns";
 import { MessageTypesChart } from "@/components/dashboard/MessageTypesChart";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { UniversalSearch } from "@/components/UniversalSearch";
+import { OnboardingChecklist } from "@/components/OnboardingChecklist";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const Home = () => {
+  useDocumentTitle();
+  const [showOnboarding, setShowOnboarding] = React.useState(true);
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
         <div className="flex-1 p-6 lg:p-8 space-y-6 lg:space-y-8 overflow-auto">
-          {/* Theme Toggle */}
-          <ThemeToggle />
+          {/* Header with Search and Theme Toggle */}
+          <div className="flex items-center justify-between">
+            <UniversalSearch />
+            <ThemeToggle />
+          </div>
+
+          {/* Onboarding Checklist */}
+          {showOnboarding && (
+            <OnboardingChecklist onDismiss={() => setShowOnboarding(false)} />
+          )}
 
           {/* Header Section */}
           <DashboardHeader />

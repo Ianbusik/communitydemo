@@ -26,13 +26,7 @@ export default defineConfig({
       }
     },
     // Enable gzip compression
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      }
-    }
+    minify: 'esbuild'
   },
   // Enable compression for dev server
   preview: {

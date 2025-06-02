@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 import Home from "./pages/Home";
 import Index from "./pages/Index";
 import Messages from "./pages/Messages";
@@ -19,6 +20,26 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+function AppContent() {
+  useDocumentTitle();
+  return (
+    <Routes>
+      <Route path="/home" element={<Home />} />
+      <Route path="/messages" element={<Messages />} />
+      <Route path="/campaigns" element={<Campaigns />} />
+      <Route path="/flows" element={<Flows />} />
+      <Route path="/communities" element={<Communities />} />
+      <Route path="/insights" element={<Insights />} />
+      <Route path="/scheduled" element={<Scheduled />} />
+      <Route path="/growth-tools" element={<GrowthTools />} />
+      <Route path="/settings" element={<Settings />} />
+      <Route path="/" element={<Index />} />
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
+}
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider defaultTheme="light" storageKey="community-theme">
@@ -26,20 +47,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/home" element={<Home />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/campaigns" element={<Campaigns />} />
-            <Route path="/flows" element={<Flows />} />
-            <Route path="/communities" element={<Communities />} />
-            <Route path="/insights" element={<Insights />} />
-            <Route path="/scheduled" element={<Scheduled />} />
-            <Route path="/growth-tools" element={<GrowthTools />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/" element={<Index />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AppContent />
         </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
