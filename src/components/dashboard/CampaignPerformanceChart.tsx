@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList } from 'recharts';
@@ -49,7 +48,7 @@ export const CampaignPerformanceChart: React.FC = () => {
         dominantBaseline="middle"
         fontSize={11}
         fontWeight="600"
-        stroke="white"
+        stroke="hsl(var(--card))"
         strokeWidth={3}
         paintOrder="stroke"
       >
@@ -63,8 +62,8 @@ export const CampaignPerformanceChart: React.FC = () => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
-        <div className="bg-white p-4 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-semibold text-gray-900 mb-2">{label}</p>
+        <div className="bg-card p-4 border border-border rounded-lg shadow-lg">
+          <p className="font-semibold text-foreground mb-2">{label}</p>
           <div className="space-y-2">
             {payload.map((entry: any) => (
               <div key={entry.dataKey} className="flex items-center justify-between gap-4">
@@ -73,22 +72,22 @@ export const CampaignPerformanceChart: React.FC = () => {
                     className="w-3 h-3 rounded-full" 
                     style={{ backgroundColor: entry.color }}
                   />
-                  <span className="text-sm text-gray-600">{entry.name}:</span>
+                  <span className="text-sm text-muted-foreground">{entry.name}:</span>
                 </div>
-                <span className="font-medium">{entry.value.toLocaleString()}</span>
+                <span className="font-medium text-foreground">{entry.value.toLocaleString()}</span>
               </div>
             ))}
           </div>
-          <div className="border-t border-gray-100 mt-3 pt-3 space-y-1">
-            <div className="flex justify-between text-xs text-gray-500">
+          <div className="border-t border-border mt-3 pt-3 space-y-1">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>Delivery Rate:</span>
               <span>{((data.delivered / data.sent) * 100).toFixed(1)}%</span>
             </div>
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>Open Rate:</span>
               <span>{((data.opened / data.delivered) * 100).toFixed(1)}%</span>
             </div>
-            <div className="flex justify-between text-xs text-gray-500">
+            <div className="flex justify-between text-xs text-muted-foreground">
               <span>Click Rate:</span>
               <span>{((data.clicked / data.opened) * 100).toFixed(1)}%</span>
             </div>
@@ -100,51 +99,51 @@ export const CampaignPerformanceChart: React.FC = () => {
   };
 
   return (
-    <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
+    <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-card">
       <CardHeader className="pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
           <div className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5 text-blue-600" />
-            <CardTitle className="text-xl font-semibold text-gray-900">Campaign Performance</CardTitle>
+            <BarChart3 className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+            <CardTitle className="text-xl font-semibold text-foreground">Campaign Performance</CardTitle>
           </div>
-          <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg font-medium">Last 7 Days</div>
+          <div className="text-sm text-muted-foreground bg-muted px-3 py-1.5 rounded-lg font-medium">Last 7 Days</div>
         </div>
         
         {/* Performance Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
-          <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+          <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-3 border border-blue-100 dark:border-blue-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <Mail className="h-4 w-4 text-blue-600" />
-              <span className="text-xs font-medium text-blue-800">Avg Delivery</span>
+              <Mail className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-xs font-medium text-blue-800 dark:text-blue-200">Avg Delivery</span>
             </div>
-            <p className="text-lg font-bold text-blue-900">{avgDeliveryRate}%</p>
+            <p className="text-lg font-bold text-blue-900 dark:text-blue-100">{avgDeliveryRate}%</p>
           </div>
-          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+          <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-3 border border-green-100 dark:border-green-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <Eye className="h-4 w-4 text-green-600" />
-              <span className="text-xs font-medium text-green-800">Avg Open</span>
+              <Eye className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-xs font-medium text-green-800 dark:text-green-200">Avg Open</span>
             </div>
-            <p className="text-lg font-bold text-green-900">{avgOpenRate}%</p>
+            <p className="text-lg font-bold text-green-900 dark:text-green-100">{avgOpenRate}%</p>
           </div>
-          <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
+          <div className="bg-orange-50 dark:bg-orange-950/30 rounded-lg p-3 border border-orange-100 dark:border-orange-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <MousePointer className="h-4 w-4 text-orange-600" />
-              <span className="text-xs font-medium text-orange-800">Avg Click</span>
+              <MousePointer className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+              <span className="text-xs font-medium text-orange-800 dark:text-orange-200">Avg Click</span>
             </div>
-            <p className="text-lg font-bold text-orange-900">{avgClickRate}%</p>
+            <p className="text-lg font-bold text-orange-900 dark:text-orange-100">{avgClickRate}%</p>
           </div>
-          <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
+          <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-3 border border-purple-100 dark:border-purple-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <Star className="h-4 w-4 text-purple-600" />
-              <span className="text-xs font-medium text-purple-800">Best Day</span>
+              <Star className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-xs font-medium text-purple-800 dark:text-purple-200">Best Day</span>
             </div>
-            <p className="text-sm font-bold text-purple-900">{bestPerformingDay.date}</p>
+            <p className="text-sm font-bold text-purple-900 dark:text-purple-100">{bestPerformingDay.date}</p>
           </div>
         </div>
 
         {/* Interactive Legend / Toggle Controls */}
-        <div className="flex flex-wrap gap-2 mt-4 p-3 bg-gray-50 rounded-lg">
-          <span className="text-sm font-medium text-gray-700 mr-2">Show:</span>
+        <div className="flex flex-wrap gap-2 mt-4 p-3 bg-muted rounded-lg">
+          <span className="text-sm font-medium text-foreground mr-2">Show:</span>
           {Object.entries(chartConfig).map(([key, config]) => (
             <Button
               key={key}
@@ -155,7 +154,7 @@ export const CampaignPerformanceChart: React.FC = () => {
             >
               <div 
                 className="w-2 h-2 rounded-full mr-2" 
-                style={{ backgroundColor: visibleLines[key as keyof typeof visibleLines] ? config.color : '#d1d5db' }}
+                style={{ backgroundColor: visibleLines[key as keyof typeof visibleLines] ? config.color : 'hsl(var(--muted-foreground))' }}
               />
               {config.label}
             </Button>
@@ -166,12 +165,12 @@ export const CampaignPerformanceChart: React.FC = () => {
         <div className="h-80 w-full mb-6">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={campaignData} margin={{ top: 40, right: 20, left: 20, bottom: 60 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis 
                 dataKey="date" 
                 fontSize={12}
                 tickMargin={8}
-                stroke="#64748b"
+                stroke="hsl(var(--muted-foreground))"
                 interval={0}
                 angle={-45}
                 textAnchor="end"
@@ -180,7 +179,7 @@ export const CampaignPerformanceChart: React.FC = () => {
               <YAxis 
                 fontSize={12}
                 tickMargin={8}
-                stroke="#64748b"
+                stroke="hsl(var(--muted-foreground))"
                 width={60}
               />
               {visibleLines.sent && (
@@ -189,7 +188,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                   dataKey="sent" 
                   stroke={chartConfig.sent.color}
                   strokeWidth={3}
-                  dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                  dot={{ r: 5, strokeWidth: 2, fill: "hsl(var(--card))" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
                 >
                   <LabelList content={<CustomLabel />} />
@@ -201,7 +200,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                   dataKey="delivered" 
                   stroke={chartConfig.delivered.color}
                   strokeWidth={3}
-                  dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                  dot={{ r: 5, strokeWidth: 2, fill: "hsl(var(--card))" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
                 >
                   <LabelList content={<CustomLabel />} />
@@ -213,7 +212,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                   dataKey="opened" 
                   stroke={chartConfig.opened.color}
                   strokeWidth={3}
-                  dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                  dot={{ r: 5, strokeWidth: 2, fill: "hsl(var(--card))" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
                 >
                   <LabelList content={<CustomLabel />} />
@@ -225,7 +224,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                   dataKey="clicked" 
                   stroke={chartConfig.clicked.color}
                   strokeWidth={3}
-                  dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                  dot={{ r: 5, strokeWidth: 2, fill: "hsl(var(--card))" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
                 >
                   <LabelList content={<CustomLabel />} />
@@ -236,31 +235,31 @@ export const CampaignPerformanceChart: React.FC = () => {
         </div>
 
         {/* Data Table for At-a-Glance View */}
-        <div className="mt-6 bg-gray-50 rounded-lg p-4">
-          <h4 className="text-sm font-semibold text-gray-900 mb-3">Daily Performance Data</h4>
+        <div className="mt-6 bg-muted rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-foreground mb-3">Daily Performance Data</h4>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="text-left py-2 font-medium text-gray-600">Day</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Sent</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Delivered</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Opened</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Clicked</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Open Rate</th>
-                  <th className="text-right py-2 font-medium text-gray-600">Click Rate</th>
+                <tr className="border-b border-border">
+                  <th className="text-left py-2 font-medium text-muted-foreground">Day</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Sent</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Delivered</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Opened</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Clicked</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Open Rate</th>
+                  <th className="text-right py-2 font-medium text-muted-foreground">Click Rate</th>
                 </tr>
               </thead>
               <tbody>
                 {campaignData.map((day, index) => (
-                  <tr key={index} className="border-b border-gray-100 hover:bg-white transition-colors">
-                    <td className="py-2 font-medium text-gray-900">{day.date}</td>
-                    <td className="text-right py-2 text-gray-700">{day.sent.toLocaleString()}</td>
-                    <td className="text-right py-2 text-gray-700">{day.delivered.toLocaleString()}</td>
-                    <td className="text-right py-2 text-gray-700">{day.opened.toLocaleString()}</td>
-                    <td className="text-right py-2 text-gray-700">{day.clicked.toLocaleString()}</td>
-                    <td className="text-right py-2 text-gray-700">{day.openRate.toFixed(1)}%</td>
-                    <td className="text-right py-2 text-gray-700">{day.clickRate.toFixed(1)}%</td>
+                  <tr key={index} className="border-b border-border hover:bg-card transition-colors">
+                    <td className="py-2 font-medium text-foreground">{day.date}</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.sent.toLocaleString()}</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.delivered.toLocaleString()}</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.opened.toLocaleString()}</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.clicked.toLocaleString()}</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.openRate.toFixed(1)}%</td>
+                    <td className="text-right py-2 text-muted-foreground">{day.clickRate.toFixed(1)}%</td>
                   </tr>
                 ))}
               </tbody>
@@ -269,27 +268,27 @@ export const CampaignPerformanceChart: React.FC = () => {
         </div>
         
         {/* Enhanced Quick Insights */}
-        <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-green-50 rounded-lg border border-blue-100">
-          <h4 className="text-sm font-semibold text-gray-900 mb-3 flex items-center gap-2">
-            <Target className="h-4 w-4 text-blue-600" />
+        <div className="mt-4 p-4 bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-950/30 dark:to-green-950/30 rounded-lg border border-blue-100 dark:border-blue-900/50">
+          <h4 className="text-sm font-semibold text-foreground mb-3 flex items-center gap-2">
+            <Target className="h-4 w-4 text-blue-600 dark:text-blue-400" />
             Performance Insights
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-muted-foreground">
             <div className="flex items-center space-x-2">
               <TrendingUp className="h-4 w-4 text-green-500" />
-              <span>Total messages sent: <strong>{totalSent.toLocaleString()}</strong></span>
+              <span>Total messages sent: <strong className="text-foreground">{totalSent.toLocaleString()}</strong></span>
             </div>
             <div className="flex items-center space-x-2">
               <CheckCircle className="h-4 w-4 text-blue-500" />
-              <span>Delivery rate: <strong>{avgDeliveryRate}%</strong> (Excellent)</span>
+              <span>Delivery rate: <strong className="text-foreground">{avgDeliveryRate}%</strong> (Excellent)</span>
             </div>
             <div className="flex items-center space-x-2">
               <Eye className="h-4 w-4 text-orange-500" />
-              <span>Open rate: <strong>{avgOpenRate}%</strong> (Above average)</span>
+              <span>Open rate: <strong className="text-foreground">{avgOpenRate}%</strong> (Above average)</span>
             </div>
             <div className="flex items-center space-x-2">
               <MousePointer className="h-4 w-4 text-purple-500" />
-              <span>Click rate: <strong>{avgClickRate}%</strong> (Strong performance)</span>
+              <span>Click rate: <strong className="text-foreground">{avgClickRate}%</strong> (Strong performance)</span>
             </div>
           </div>
         </div>
