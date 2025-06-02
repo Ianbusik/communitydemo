@@ -1,13 +1,19 @@
-
 import React, { useState } from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { DateRangePicker } from "@/components/ui/date-range-picker";
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { TrendingUp, TrendingDown, Users, MessageSquare, Clock, Target } from "lucide-react";
+import { DateRange } from "react-day-picker";
+import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const Insights = () => {
+  useDocumentTitle();
+  
+  const [selectedDateRange, setSelectedDateRange] = useState<DateRange | undefined>();
+  
   const [engagementData] = useState([
     { month: 'Jan', messages: 4200, responses: 3100, opens: 3800 },
     { month: 'Feb', messages: 3800, responses: 2900, opens: 3500 },
@@ -44,13 +50,19 @@ const Insights = () => {
         <AppSidebar />
         <div className="flex-1 p-6 lg:p-8 space-y-6 lg:space-y-8">
           {/* Header */}
-          <div>
-            <h1 className="text-3xl font-bold text-foreground">Insights</h1>
-            <p className="text-muted-foreground mt-1">Analyze your community engagement and performance</p>
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-3xl font-bold text-foreground">Insights</h1>
+              <p className="text-muted-foreground mt-1">Analyze your community engagement and performance</p>
+            </div>
+            <DateRangePicker 
+              date={selectedDateRange}
+              onDateChange={setSelectedDateRange}
+            />
           </div>
 
           {/* Key Metrics */}
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4" role="region" aria-label="Key performance metrics">
             <Card>
               <CardContent className="p-4">
                 <div className="flex items-center justify-between">
@@ -58,8 +70,8 @@ const Insights = () => {
                     <p className="text-sm text-muted-foreground">Total Engagement</p>
                     <p className="text-2xl font-bold text-foreground">94.2%</p>
                   </div>
-                  <div className="flex items-center text-green-600">
-                    <TrendingUp className="h-4 w-4 mr-1" />
+                  <div className="flex items-center text-green-600" aria-label="5.2% increase">
+                    <TrendingUp className="h-4 w-4 mr-1" aria-hidden="true" />
                     <span className="text-xs">+5.2%</span>
                   </div>
                 </div>
@@ -73,8 +85,8 @@ const Insights = () => {
                     <p className="text-sm text-muted-foreground">Response Rate</p>
                     <p className="text-2xl font-bold text-foreground">78.5%</p>
                   </div>
-                  <div className="flex items-center text-green-600">
-                    <TrendingUp className="h-4 w-4 mr-1" />
+                  <div className="flex items-center text-green-600" aria-label="2.1% increase">
+                    <TrendingUp className="h-4 w-4 mr-1" aria-hidden="true" />
                     <span className="text-xs">+2.1%</span>
                   </div>
                 </div>
@@ -88,8 +100,8 @@ const Insights = () => {
                     <p className="text-sm text-muted-foreground">Avg. Session</p>
                     <p className="text-2xl font-bold text-foreground">4m 32s</p>
                   </div>
-                  <div className="flex items-center text-red-600">
-                    <TrendingDown className="h-4 w-4 mr-1" />
+                  <div className="flex items-center text-red-600" aria-label="0.8% decrease">
+                    <TrendingDown className="h-4 w-4 mr-1" aria-hidden="true" />
                     <span className="text-xs">-0.8%</span>
                   </div>
                 </div>
@@ -103,8 +115,8 @@ const Insights = () => {
                     <p className="text-sm text-muted-foreground">Click-through Rate</p>
                     <p className="text-2xl font-bold text-foreground">24.6%</p>
                   </div>
-                  <div className="flex items-center text-green-600">
-                    <TrendingUp className="h-4 w-4 mr-1" />
+                  <div className="flex items-center text-green-600" aria-label="3.4% increase">
+                    <TrendingUp className="h-4 w-4 mr-1" aria-hidden="true" />
                     <span className="text-xs">+3.4%</span>
                   </div>
                 </div>
@@ -113,17 +125,17 @@ const Insights = () => {
           </div>
 
           <Tabs defaultValue="engagement" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="engagement">Engagement</TabsTrigger>
-              <TabsTrigger value="audience">Audience</TabsTrigger>
-              <TabsTrigger value="campaigns">Campaigns</TabsTrigger>
-              <TabsTrigger value="devices">Devices</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 bg-muted">
+              <TabsTrigger value="engagement" className="data-[state=active]:bg-background data-[state=active]:text-foreground">Engagement</TabsTrigger>
+              <TabsTrigger value="audience" className="data-[state=active]:bg-background data-[state=active]:text-foreground">Audience</TabsTrigger>
+              <TabsTrigger value="campaigns" className="data-[state=active]:bg-background data-[state=active]:text-foreground">Campaigns</TabsTrigger>
+              <TabsTrigger value="devices" className="data-[state=active]:bg-background data-[state=active]:text-foreground">Devices</TabsTrigger>
             </TabsList>
 
             <TabsContent value="engagement" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Engagement Trends</CardTitle>
+                  <CardTitle className="text-foreground">Engagement Trends</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={400}>
@@ -135,7 +147,8 @@ const Insights = () => {
                         contentStyle={{ 
                           backgroundColor: 'hsl(var(--card))', 
                           border: '1px solid hsl(var(--border))',
-                          borderRadius: '8px'
+                          borderRadius: '8px',
+                          color: 'hsl(var(--foreground))'
                         }}
                       />
                       <Legend />
@@ -152,7 +165,7 @@ const Insights = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Age Demographics</CardTitle>
+                    <CardTitle className="text-foreground">Age Demographics</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -164,7 +177,8 @@ const Insights = () => {
                           contentStyle={{ 
                             backgroundColor: 'hsl(var(--card))', 
                             border: '1px solid hsl(var(--border))',
-                            borderRadius: '8px'
+                            borderRadius: '8px',
+                            color: 'hsl(var(--foreground))'
                           }}
                         />
                         <Bar dataKey="count" fill="#3b82f6" />
@@ -175,7 +189,7 @@ const Insights = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Audience Distribution</CardTitle>
+                    <CardTitle className="text-foreground">Audience Distribution</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     {audienceData.map((item, index) => (
@@ -200,7 +214,7 @@ const Insights = () => {
             <TabsContent value="campaigns" className="space-y-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Campaign Performance</CardTitle>
+                  <CardTitle className="text-foreground">Campaign Performance</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <ResponsiveContainer width="100%" height={400}>
@@ -212,7 +226,8 @@ const Insights = () => {
                         contentStyle={{ 
                           backgroundColor: 'hsl(var(--card))', 
                           border: '1px solid hsl(var(--border))',
-                          borderRadius: '8px'
+                          borderRadius: '8px',
+                          color: 'hsl(var(--foreground))'
                         }}
                       />
                       <Legend />
@@ -230,7 +245,7 @@ const Insights = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Device Usage</CardTitle>
+                    <CardTitle className="text-foreground">Device Usage</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ResponsiveContainer width="100%" height={300}>
@@ -252,7 +267,8 @@ const Insights = () => {
                           contentStyle={{ 
                             backgroundColor: 'hsl(var(--card))', 
                             border: '1px solid hsl(var(--border))',
-                            borderRadius: '8px'
+                            borderRadius: '8px',
+                            color: 'hsl(var(--foreground))'
                           }}
                         />
                         <Legend />
@@ -263,7 +279,7 @@ const Insights = () => {
 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Device Statistics</CardTitle>
+                    <CardTitle className="text-foreground">Device Statistics</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-6">
                     {deviceData.map((device, index) => (
