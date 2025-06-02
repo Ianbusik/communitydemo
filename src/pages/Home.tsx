@@ -1,11 +1,11 @@
-
 import React from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { MessageSquare, Users, TrendingUp, Calendar, ArrowUp, ArrowDown } from 'lucide-react';
+import { MessageSquare, Users, TrendingUp, Calendar, ArrowUp, ArrowDown, Mail, Bell, Megaphone, FileText } from 'lucide-react';
+import { Progress } from "@/components/ui/progress";
 
 const Home = () => {
   const campaignData = [
@@ -28,10 +28,46 @@ const Home = () => {
   ];
 
   const messageTypesData = [
-    { name: 'Promotional', value: 45, color: '#3b82f6' },
-    { name: 'Newsletter', value: 30, color: '#10b981' },
-    { name: 'Updates', value: 15, color: '#f59e0b' },
-    { name: 'Alerts', value: 10, color: '#ef4444' },
+    { 
+      name: 'Promotional', 
+      value: 45, 
+      color: '#3b82f6',
+      count: 127,
+      trend: 'up',
+      trendValue: '+12%',
+      description: 'Sales & marketing campaigns',
+      icon: Megaphone
+    },
+    { 
+      name: 'Newsletter', 
+      value: 30, 
+      color: '#10b981',
+      count: 85,
+      trend: 'up',
+      trendValue: '+8%',
+      description: 'Regular content updates',
+      icon: FileText
+    },
+    { 
+      name: 'Updates', 
+      value: 15, 
+      color: '#f59e0b',
+      count: 42,
+      trend: 'down',
+      trendValue: '-3%',
+      description: 'Product & service updates',
+      icon: Bell
+    },
+    { 
+      name: 'Alerts', 
+      value: 10, 
+      color: '#ef4444',
+      count: 28,
+      trend: 'up',
+      trendValue: '+5%',
+      description: 'Urgent notifications',
+      icon: Mail
+    },
   ];
 
   const recentCampaigns = [
@@ -300,21 +336,26 @@ const Home = () => {
               </CardContent>
             </Card>
 
-            {/* Message Types Distribution */}
+            {/* Enhanced Message Types Distribution */}
             <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
               <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold text-gray-900">Message Types</CardTitle>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Message Types</CardTitle>
+                  <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg font-medium">
+                    This Month
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="p-6 pt-0">
-                <div className="h-64 mb-6">
+                <div className="h-48 mb-6">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={messageTypesData}
                         cx="50%"
                         cy="50%"
-                        outerRadius="80%"
-                        innerRadius="45%"
+                        outerRadius="75%"
+                        innerRadius="40%"
                         dataKey="value"
                         stroke="white"
                         strokeWidth={3}
@@ -323,23 +364,93 @@ const Home = () => {
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Pie>
-                      <ChartTooltip />
+                      <ChartTooltip 
+                        content={({ active, payload }) => {
+                          if (active && payload && payload.length) {
+                            const data = payload[0].payload;
+                            return (
+                              <div className="bg-white p-3 rounded-lg shadow-lg border border-gray-200">
+                                <div className="flex items-center space-x-2 mb-2">
+                                  <div 
+                                    className="w-3 h-3 rounded-full" 
+                                    style={{ backgroundColor: data.color }}
+                                  />
+                                  <span className="font-semibold text-gray-900">{data.name}</span>
+                                </div>
+                                <div className="text-sm text-gray-600 space-y-1">
+                                  <div>{data.value}% of total messages</div>
+                                  <div>{data.count} messages sent</div>
+                                  <div className="text-xs text-gray-500">{data.description}</div>
+                                </div>
+                              </div>
+                            );
+                          }
+                          return null;
+                        }}
+                      />
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="space-y-3">
+                
+                {/* Enhanced Legend with More Details */}
+                <div className="space-y-4">
                   {messageTypesData.map((item, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div 
-                          className="w-3 h-3 rounded-full" 
-                          style={{ backgroundColor: item.color }}
-                        ></div>
-                        <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                    <div key={index} className="group">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-3">
+                          <div className="flex items-center space-x-2">
+                            <div 
+                              className="w-3 h-3 rounded-full" 
+                              style={{ backgroundColor: item.color }}
+                            />
+                            <item.icon className="h-4 w-4 text-gray-500" />
+                          </div>
+                          <div>
+                            <span className="text-sm font-medium text-gray-900">{item.name}</span>
+                            <p className="text-xs text-gray-500">{item.description}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm font-semibold text-gray-900">{item.value}%</span>
+                            <div className={`flex items-center text-xs font-medium px-2 py-1 rounded-full ${
+                              item.trend === 'up' 
+                                ? 'text-green-700 bg-green-100' 
+                                : 'text-red-700 bg-red-100'
+                            }`}>
+                              {item.trend === 'up' ? 
+                                <ArrowUp className="h-3 w-3 mr-1" /> : 
+                                <ArrowDown className="h-3 w-3 mr-1" />
+                              }
+                              {item.trendValue}
+                            </div>
+                          </div>
+                          <p className="text-xs text-gray-500 mt-1">{item.count} messages</p>
+                        </div>
                       </div>
-                      <span className="text-sm font-semibold text-gray-900">{item.value}%</span>
+                      <Progress 
+                        value={item.value} 
+                        className="h-2 bg-gray-100"
+                        style={{
+                          '--progress-foreground': item.color
+                        } as React.CSSProperties}
+                      />
                     </div>
                   ))}
+                </div>
+                
+                {/* Summary Stats */}
+                <div className="mt-6 pt-4 border-t border-gray-100">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-gray-900">282</p>
+                      <p className="text-xs text-gray-500">Total Messages</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold text-green-600">+7.2%</p>
+                      <p className="text-xs text-gray-500">vs Last Month</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
