@@ -2,13 +2,15 @@
 import { useState } from "react"
 import { 
   Home, 
-  Users, 
-  Megaphone, 
   MessageSquare, 
+  Megaphone, 
+  GitBranch,
+  Users, 
   BarChart3, 
-  Settings, 
-  HelpCircle,
-  Puzzle
+  Calendar,
+  TrendingUp,
+  Puzzle,
+  Settings,
 } from "lucide-react"
 import { NavLink, useLocation } from "react-router-dom"
 
@@ -17,7 +19,6 @@ import {
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
@@ -26,17 +27,16 @@ import {
 } from "@/components/ui/sidebar"
 
 const navigationItems = [
-  { title: "Dashboard", url: "/dashboard", icon: Home },
-  { title: "Community", url: "/community", icon: Users },
+  { title: "Home", url: "/home", icon: Home },
+  { title: "Messages", url: "/messages", icon: MessageSquare },
   { title: "Campaigns", url: "/campaigns", icon: Megaphone },
-  { title: "Conversations", url: "/conversations", icon: MessageSquare },
-  { title: "Analytics", url: "/analytics", icon: BarChart3 },
-  { title: "Add-ons", url: "/", icon: Puzzle },
-]
-
-const bottomItems = [
+  { title: "Flows", url: "/flows", icon: GitBranch },
+  { title: "Communities", url: "/communities", icon: Users },
+  { title: "Insights", url: "/insights", icon: BarChart3 },
+  { title: "Scheduled", url: "/scheduled", icon: Calendar },
+  { title: "Growth Tools", url: "/growth-tools", icon: TrendingUp },
+  { title: "Add-Ons", url: "/", icon: Puzzle },
   { title: "Settings", url: "/settings", icon: Settings },
-  { title: "Help & Support", url: "/help", icon: HelpCircle },
 ]
 
 export function AppSidebar() {
@@ -64,23 +64,6 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={isActive(item.url)}>
-                    <NavLink to={item.url} className="flex items-center space-x-3">
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.title}</span>
-                    </NavLink>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup className="mt-auto">
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {bottomItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink to={item.url} className="flex items-center space-x-3">
