@@ -1,317 +1,187 @@
 
-import { MessageSquare, Users, TrendingUp, Calendar, Megaphone, FileText, Bell, Mail } from 'lucide-react';
+import { 
+  Users, 
+  Mail, 
+  MousePointer, 
+  TrendingUp, 
+  MessageSquare, 
+  Image, 
+  FileText, 
+  Phone,
+  ArrowUp,
+  ArrowDown
+} from 'lucide-react';
+
+export const stats = [
+  {
+    title: "Total Subscribers",
+    value: "12,486",
+    change: "+12%",
+    trend: "up" as const,
+    icon: Users,
+    iconBg: "bg-blue-500",
+    subtitle: "Active users this month"
+  },
+  {
+    title: "Messages Sent",
+    value: "3,247",
+    change: "+8%",
+    trend: "up" as const,
+    icon: Mail,
+    iconBg: "bg-green-500",
+    subtitle: "Delivered successfully"
+  },
+  {
+    title: "Click Rate",
+    value: "24.3%",
+    change: "-2%",
+    trend: "down" as const,
+    icon: MousePointer,
+    iconBg: "bg-orange-500",
+    subtitle: "Above industry average"
+  },
+  {
+    title: "Revenue",
+    value: "$84,256",
+    change: "+15%",
+    trend: "up" as const,
+    icon: TrendingUp,
+    iconBg: "bg-purple-500",
+    subtitle: "Monthly recurring revenue"
+  }
+];
 
 export const campaignData = [
-  { 
-    date: 'May 26', 
-    sent: 1200, 
-    delivered: 1180, 
-    opened: 850, 
-    clicked: 320,
-    deliveryRate: 98.3,
-    openRate: 72.0,
-    clickRate: 27.1,
-    bounced: 20,
-    unsubscribed: 5
-  },
-  { 
-    date: 'May 27', 
-    sent: 1350, 
-    delivered: 1330, 
-    opened: 920, 
-    clicked: 280,
-    deliveryRate: 98.5,
-    openRate: 69.2,
-    clickRate: 21.0,
-    bounced: 20,
-    unsubscribed: 8
-  },
-  { 
-    date: 'May 28', 
-    sent: 980, 
-    delivered: 950, 
-    opened: 600, 
-    clicked: 180,
-    deliveryRate: 96.9,
-    openRate: 63.2,
-    clickRate: 30.0,
-    bounced: 30,
-    unsubscribed: 3
-  },
-  { 
-    date: 'May 29', 
-    sent: 1450, 
-    delivered: 1420, 
-    opened: 950, 
-    clicked: 300,
-    deliveryRate: 97.9,
-    openRate: 66.9,
-    clickRate: 31.6,
-    bounced: 30,
-    unsubscribed: 7
-  },
-  { 
-    date: 'May 30', 
-    sent: 1650, 
-    delivered: 1630, 
-    opened: 1100, 
-    clicked: 420,
-    deliveryRate: 98.8,
-    openRate: 67.5,
-    clickRate: 38.2,
-    bounced: 20,
-    unsubscribed: 4
-  },
-  { 
-    date: 'May 31', 
-    sent: 1800, 
-    delivered: 1780, 
-    opened: 1250, 
-    clicked: 450,
-    deliveryRate: 98.9,
-    openRate: 70.2,
-    clickRate: 36.0,
-    bounced: 20,
-    unsubscribed: 6
-  },
-  { 
-    date: 'Jun 1', 
-    sent: 1900, 
-    delivered: 1880, 
-    opened: 1300, 
-    clicked: 480,
-    deliveryRate: 98.9,
-    openRate: 69.2,
-    clickRate: 36.9,
-    bounced: 20,
-    unsubscribed: 5
-  },
+  { date: "Mon", sent: 1200, delivered: 1150, opened: 890, clicked: 245, openRate: 77.4, clickRate: 27.5 },
+  { date: "Tue", sent: 1350, delivered: 1298, opened: 1024, clicked: 287, openRate: 78.9, clickRate: 28.0 },
+  { date: "Wed", sent: 1180, delivered: 1134, opened: 876, clicked: 198, openRate: 77.2, clickRate: 22.6 },
+  { date: "Thu", sent: 1420, delivered: 1365, opened: 1147, clicked: 334, openRate: 84.0, clickRate: 29.1 },
+  { date: "Fri", sent: 1580, delivered: 1518, opened: 1289, clicked: 412, openRate: 84.9, clickRate: 32.0 },
+  { date: "Sat", sent: 980, delivered: 941, opened: 706, clicked: 169, openRate: 75.0, clickRate: 23.9 },
+  { date: "Sun", sent: 750, delivered: 720, opened: 518, clicked: 114, openRate: 71.9, clickRate: 22.0 }
 ];
+
+export const chartConfig = {
+  sent: {
+    label: "Sent",
+    color: "hsl(var(--chart-1))"
+  },
+  delivered: {
+    label: "Delivered", 
+    color: "hsl(var(--chart-2))"
+  },
+  opened: {
+    label: "Opened",
+    color: "hsl(var(--chart-3))"
+  },
+  clicked: {
+    label: "Clicked",
+    color: "hsl(var(--chart-4))"
+  }
+};
 
 export const audienceGrowthData = [
   { 
-    month: 'Jan', 
-    subscribers: 12500,
-    newSubscribers: 850,
-    unsubscribes: 120,
-    netGrowth: 730,
-    growthRate: 6.2,
-    activeUsers: 9800,
-    engagementRate: 78.4
+    month: "Jan", 
+    subscribers: 8420, 
+    newSubscribers: 420, 
+    unsubscribes: 32, 
+    netGrowth: 388,
+    growthRate: 4.8,
+    engagementRate: 72.3,
+    activeUsers: 6420
   },
   { 
-    month: 'Feb', 
-    subscribers: 13200,
-    newSubscribers: 920,
-    unsubscribes: 220,
-    netGrowth: 700,
-    growthRate: 5.6,
-    activeUsers: 10450,
-    engagementRate: 79.2
+    month: "Feb", 
+    subscribers: 9150, 
+    newSubscribers: 730, 
+    unsubscribes: 45, 
+    netGrowth: 685,
+    growthRate: 8.1,
+    engagementRate: 74.1,
+    activeUsers: 6980
   },
   { 
-    month: 'Mar', 
-    subscribers: 14100,
-    newSubscribers: 1150,
-    unsubscribes: 250,
-    netGrowth: 900,
+    month: "Mar", 
+    subscribers: 9890, 
+    newSubscribers: 740, 
+    unsubscribes: 28, 
+    netGrowth: 712,
+    growthRate: 7.8,
+    engagementRate: 76.8,
+    activeUsers: 7590
+  },
+  { 
+    month: "Apr", 
+    subscribers: 10650, 
+    newSubscribers: 760, 
+    unsubscribes: 41, 
+    netGrowth: 719,
+    growthRate: 7.3,
+    engagementRate: 78.2,
+    activeUsers: 8330
+  },
+  { 
+    month: "May", 
+    subscribers: 11420, 
+    newSubscribers: 770, 
+    unsubscribes: 35, 
+    netGrowth: 735,
+    growthRate: 6.9,
+    engagementRate: 79.5,
+    activeUsers: 9080
+  },
+  { 
+    month: "Jun", 
+    subscribers: 12200, 
+    newSubscribers: 780, 
+    unsubscribes: 29, 
+    netGrowth: 751,
     growthRate: 6.8,
-    activeUsers: 11200,
-    engagementRate: 79.4
-  },
-  { 
-    month: 'Apr', 
-    subscribers: 15300,
-    newSubscribers: 1420,
-    unsubscribes: 220,
-    netGrowth: 1200,
-    growthRate: 8.5,
-    activeUsers: 12150,
-    engagementRate: 79.4
-  },
-  { 
-    month: 'May', 
-    subscribers: 16800,
-    newSubscribers: 1750,
-    unsubscribes: 250,
-    netGrowth: 1500,
-    growthRate: 9.8,
-    activeUsers: 13440,
-    engagementRate: 80.0
-  },
-  { 
-    month: 'Jun', 
-    subscribers: 18200,
-    newSubscribers: 1680,
-    unsubscribes: 280,
-    netGrowth: 1400,
-    growthRate: 8.3,
-    activeUsers: 14560,
-    engagementRate: 80.0
-  },
+    engagementRate: 81.2,
+    activeUsers: 9906
+  }
 ];
 
 export const messageTypesData = [
   { 
-    name: 'Promotional', 
+    name: "Text Messages", 
     value: 45, 
-    color: '#3b82f6',
+    color: "#3b82f6", 
     count: 127,
-    trend: 'up',
-    trendValue: '+12%',
-    description: 'Sales & marketing campaigns',
-    icon: Megaphone
-  },
-  { 
-    name: 'Newsletter', 
-    value: 30, 
-    color: '#10b981',
-    count: 85,
-    trend: 'up',
-    trendValue: '+8%',
-    description: 'Regular content updates',
-    icon: FileText
-  },
-  { 
-    name: 'Updates', 
-    value: 15, 
-    color: '#f59e0b',
-    count: 42,
-    trend: 'down',
-    trendValue: '-3%',
-    description: 'Product & service updates',
-    icon: Bell
-  },
-  { 
-    name: 'Alerts', 
-    value: 10, 
-    color: '#ef4444',
-    count: 28,
-    trend: 'up',
-    trendValue: '+5%',
-    description: 'Urgent notifications',
-    icon: Mail
-  },
-];
-
-export const recentCampaigns = [
-  { 
-    id: 1, 
-    name: 'Summer Sale Campaign', 
-    sent: '2 hours ago', 
-    recipients: 15420, 
-    openRate: '24.5%', 
-    clickRate: '8.2%',
-    delivered: 15180,
-    deliveryRate: '98.4%',
-    revenue: '$12,450',
-    status: 'completed',
-    trend: 'up',
-    subject: '🌞 Summer Sale: Up to 50% Off Everything!',
-    template: 'Promotional Email',
-    segment: 'Active Customers',
-    bounces: 240,
-    unsubscribes: 18
-  },
-  { 
-    id: 2, 
-    name: 'Product Update Newsletter', 
-    sent: '1 day ago', 
-    recipients: 12300, 
-    openRate: '31.2%', 
-    clickRate: '12.8%',
-    delivered: 12150,
-    deliveryRate: '98.8%',
-    revenue: '$3,280',
-    status: 'completed',
-    trend: 'up',
-    subject: 'New Features: What\'s Coming This Month',
-    template: 'Newsletter',
-    segment: 'All Subscribers',
-    bounces: 150,
-    unsubscribes: 8
-  },
-  { 
-    id: 3, 
-    name: 'Welcome Series - Part 3', 
-    sent: '2 days ago', 
-    recipients: 8750, 
-    openRate: '42.1%', 
-    clickRate: '18.5%',
-    delivered: 8680,
-    deliveryRate: '99.2%',
-    revenue: '$1,850',
-    status: 'completed',
-    trend: 'up',
-    subject: 'Your Journey Continues: Advanced Tips Inside',
-    template: 'Welcome Series',
-    segment: 'New Subscribers',
-    bounces: 70,
-    unsubscribes: 12
-  },
-  { 
-    id: 4, 
-    name: 'Flash Sale Alert', 
-    sent: '3 days ago', 
-    recipients: 18600, 
-    openRate: '18.7%', 
-    clickRate: '6.4%',
-    delivered: 18320,
-    deliveryRate: '98.5%',
-    revenue: '$8,920',
-    status: 'completed',
-    trend: 'down',
-    subject: '⚡ Flash Sale: 24 Hours Only!',
-    template: 'Flash Sale',
-    segment: 'VIP Customers',
-    bounces: 280,
-    unsubscribes: 35
-  },
-];
-
-export const stats = [
-  {
-    title: "Total Messages",
-    value: "127,543",
     icon: MessageSquare,
-    color: "from-blue-500 to-blue-600",
-    iconBg: "bg-blue-500",
-    change: "+12.5%",
-    trend: "up"
+    description: "Standard text communications",
+    trend: "up" as const,
+    trendValue: "+5.2%"
   },
-  {
-    title: "Active Subscribers", 
-    value: "18,247",
-    icon: Users,
-    color: "from-green-500 to-green-600",
-    iconBg: "bg-green-500",
-    change: "+8.3%",
-    trend: "up"
+  { 
+    name: "Image Messages", 
+    value: 30, 
+    color: "#10b981", 
+    count: 84,
+    icon: Image,
+    description: "Photos and visual content",
+    trend: "up" as const,
+    trendValue: "+12.1%"
   },
-  {
-    title: "Open Rate",
-    value: "24.8%", 
-    icon: TrendingUp,
-    color: "from-orange-500 to-orange-600",
-    iconBg: "bg-orange-500",
-    change: "+2.1%",
-    trend: "up"
+  { 
+    name: "Document Shares", 
+    value: 15, 
+    color: "#f59e0b", 
+    count: 42,
+    icon: FileText,
+    description: "PDFs and file attachments",
+    trend: "down" as const,
+    trendValue: "-3.4%"
   },
-  {
-    title: "This Month",
-    value: "89",
-    subtitle: "Campaigns",
-    icon: Calendar,
-    color: "from-purple-500 to-purple-600", 
-    iconBg: "bg-purple-500",
-    change: "+15.2%",
-    trend: "up"
+  { 
+    name: "Voice Calls", 
+    value: 10, 
+    color: "#8b5cf6", 
+    count: 29,
+    icon: Phone,
+    description: "Audio conversations",
+    trend: "up" as const,
+    trendValue: "+8.7%"
   }
 ];
-
-export const chartConfig = {
-  sent: { label: "Sent", color: "#3b82f6" },
-  delivered: { label: "Delivered", color: "#10b981" },
-  opened: { label: "Opened", color: "#f59e0b" },
-  clicked: { label: "Clicked", color: "#ef4444" },
-};
