@@ -4,18 +4,95 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { MessageSquare, Users, TrendingUp, Calendar, ArrowUp, ArrowDown, Mail, Bell, Megaphone, FileText } from 'lucide-react';
+import { MessageSquare, Users, TrendingUp, Calendar, ArrowUp, ArrowDown, Mail, Bell, Megaphone, FileText, Clock, Target, Eye, MousePointer, Star, AlertCircle, CheckCircle } from 'lucide-react';
 import { Progress } from "@/components/ui/progress";
 
 const Home = () => {
   const campaignData = [
-    { date: 'May 26', sent: 1200, delivered: 1180, opened: 850, clicked: 320 },
-    { date: 'May 27', sent: 1350, delivered: 1330, opened: 920, clicked: 280 },
-    { date: 'May 28', sent: 980, delivered: 950, opened: 600, clicked: 180 },
-    { date: 'May 29', sent: 1450, delivered: 1420, opened: 950, clicked: 300 },
-    { date: 'May 30', sent: 1650, delivered: 1630, opened: 1100, clicked: 420 },
-    { date: 'May 31', sent: 1800, delivered: 1780, opened: 1250, clicked: 450 },
-    { date: 'Jun 1', sent: 1900, delivered: 1880, opened: 1300, clicked: 480 },
+    { 
+      date: 'May 26', 
+      sent: 1200, 
+      delivered: 1180, 
+      opened: 850, 
+      clicked: 320,
+      deliveryRate: 98.3,
+      openRate: 72.0,
+      clickRate: 27.1,
+      bounced: 20,
+      unsubscribed: 5
+    },
+    { 
+      date: 'May 27', 
+      sent: 1350, 
+      delivered: 1330, 
+      opened: 920, 
+      clicked: 280,
+      deliveryRate: 98.5,
+      openRate: 69.2,
+      clickRate: 21.0,
+      bounced: 20,
+      unsubscribed: 8
+    },
+    { 
+      date: 'May 28', 
+      sent: 980, 
+      delivered: 950, 
+      opened: 600, 
+      clicked: 180,
+      deliveryRate: 96.9,
+      openRate: 63.2,
+      clickRate: 30.0,
+      bounced: 30,
+      unsubscribed: 3
+    },
+    { 
+      date: 'May 29', 
+      sent: 1450, 
+      delivered: 1420, 
+      opened: 950, 
+      clicked: 300,
+      deliveryRate: 97.9,
+      openRate: 66.9,
+      clickRate: 31.6,
+      bounced: 30,
+      unsubscribed: 7
+    },
+    { 
+      date: 'May 30', 
+      sent: 1650, 
+      delivered: 1630, 
+      opened: 1100, 
+      clicked: 420,
+      deliveryRate: 98.8,
+      openRate: 67.5,
+      clickRate: 38.2,
+      bounced: 20,
+      unsubscribed: 4
+    },
+    { 
+      date: 'May 31', 
+      sent: 1800, 
+      delivered: 1780, 
+      opened: 1250, 
+      clicked: 450,
+      deliveryRate: 98.9,
+      openRate: 70.2,
+      clickRate: 36.0,
+      bounced: 20,
+      unsubscribed: 6
+    },
+    { 
+      date: 'Jun 1', 
+      sent: 1900, 
+      delivered: 1880, 
+      opened: 1300, 
+      clicked: 480,
+      deliveryRate: 98.9,
+      openRate: 69.2,
+      clickRate: 36.9,
+      bounced: 20,
+      unsubscribed: 5
+    },
   ];
 
   const audienceGrowthData = [
@@ -71,10 +148,78 @@ const Home = () => {
   ];
 
   const recentCampaigns = [
-    { id: 1, name: 'Summer Sale Campaign', sent: '2 hours ago', recipients: 15420, openRate: '24.5%', trend: 'up' },
-    { id: 2, name: 'Product Update Newsletter', sent: '1 day ago', recipients: 12300, openRate: '31.2%', trend: 'up' },
-    { id: 3, name: 'Welcome Series - Part 3', sent: '2 days ago', recipients: 8750, openRate: '42.1%', trend: 'up' },
-    { id: 4, name: 'Flash Sale Alert', sent: '3 days ago', recipients: 18600, openRate: '18.7%', trend: 'down' },
+    { 
+      id: 1, 
+      name: 'Summer Sale Campaign', 
+      sent: '2 hours ago', 
+      recipients: 15420, 
+      openRate: '24.5%', 
+      clickRate: '8.2%',
+      delivered: 15180,
+      deliveryRate: '98.4%',
+      revenue: '$12,450',
+      status: 'completed',
+      trend: 'up',
+      subject: '🌞 Summer Sale: Up to 50% Off Everything!',
+      template: 'Promotional Email',
+      segment: 'Active Customers',
+      bounces: 240,
+      unsubscribes: 18
+    },
+    { 
+      id: 2, 
+      name: 'Product Update Newsletter', 
+      sent: '1 day ago', 
+      recipients: 12300, 
+      openRate: '31.2%', 
+      clickRate: '12.8%',
+      delivered: 12150,
+      deliveryRate: '98.8%',
+      revenue: '$3,280',
+      status: 'completed',
+      trend: 'up',
+      subject: 'New Features: What\'s Coming This Month',
+      template: 'Newsletter',
+      segment: 'All Subscribers',
+      bounces: 150,
+      unsubscribes: 8
+    },
+    { 
+      id: 3, 
+      name: 'Welcome Series - Part 3', 
+      sent: '2 days ago', 
+      recipients: 8750, 
+      openRate: '42.1%', 
+      clickRate: '18.5%',
+      delivered: 8680,
+      deliveryRate: '99.2%',
+      revenue: '$1,850',
+      status: 'completed',
+      trend: 'up',
+      subject: 'Your Journey Continues: Advanced Tips Inside',
+      template: 'Welcome Series',
+      segment: 'New Subscribers',
+      bounces: 70,
+      unsubscribes: 12
+    },
+    { 
+      id: 4, 
+      name: 'Flash Sale Alert', 
+      sent: '3 days ago', 
+      recipients: 18600, 
+      openRate: '18.7%', 
+      clickRate: '6.4%',
+      delivered: 18320,
+      deliveryRate: '98.5%',
+      revenue: '$8,920',
+      status: 'completed',
+      trend: 'down',
+      subject: '⚡ Flash Sale: 24 Hours Only!',
+      template: 'Flash Sale',
+      segment: 'VIP Customers',
+      bounces: 280,
+      unsubscribes: 35
+    },
   ];
 
   const chartConfig = {
@@ -123,6 +268,20 @@ const Home = () => {
       trend: "up"
     }
   ];
+
+  // Calculate performance insights for Campaign Performance widget
+  const totalSent = campaignData.reduce((sum, day) => sum + day.sent, 0);
+  const totalDelivered = campaignData.reduce((sum, day) => sum + day.delivered, 0);
+  const totalOpened = campaignData.reduce((sum, day) => sum + day.opened, 0);
+  const totalClicked = campaignData.reduce((sum, day) => sum + day.clicked, 0);
+  
+  const avgDeliveryRate = ((totalDelivered / totalSent) * 100).toFixed(1);
+  const avgOpenRate = ((totalOpened / totalDelivered) * 100).toFixed(1);
+  const avgClickRate = ((totalClicked / totalOpened) * 100).toFixed(1);
+
+  const bestPerformingDay = campaignData.reduce((best, current) => 
+    current.openRate > best.openRate ? current : best
+  );
 
   return (
     <SidebarProvider>
@@ -182,12 +341,44 @@ const Home = () => {
 
           {/* Enhanced Charts Row */}
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
-            {/* Campaign Performance Chart */}
+            {/* Enhanced Campaign Performance Chart */}
             <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
                   <CardTitle className="text-xl font-semibold text-gray-900">Campaign Performance</CardTitle>
                   <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg font-medium">Last 7 Days</div>
+                </div>
+                
+                {/* Performance Summary Cards */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
+                  <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <Mail className="h-4 w-4 text-blue-600" />
+                      <span className="text-xs font-medium text-blue-800">Avg Delivery</span>
+                    </div>
+                    <p className="text-lg font-bold text-blue-900">{avgDeliveryRate}%</p>
+                  </div>
+                  <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <Eye className="h-4 w-4 text-green-600" />
+                      <span className="text-xs font-medium text-green-800">Avg Open</span>
+                    </div>
+                    <p className="text-lg font-bold text-green-900">{avgOpenRate}%</p>
+                  </div>
+                  <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <MousePointer className="h-4 w-4 text-orange-600" />
+                      <span className="text-xs font-medium text-orange-800">Avg Click</span>
+                    </div>
+                    <p className="text-lg font-bold text-orange-900">{avgClickRate}%</p>
+                  </div>
+                  <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
+                    <div className="flex items-center space-x-2 mb-1">
+                      <Star className="h-4 w-4 text-purple-600" />
+                      <span className="text-xs font-medium text-purple-800">Best Day</span>
+                    </div>
+                    <p className="text-sm font-bold text-purple-900">{bestPerformingDay.date}</p>
+                  </div>
                 </div>
               </CardHeader>
               <CardContent className="p-6 pt-0">
@@ -247,6 +438,29 @@ const Home = () => {
                     </LineChart>
                   </ChartContainer>
                 </div>
+                
+                {/* Quick Insights */}
+                <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                  <h4 className="text-sm font-semibold text-gray-900 mb-2">Quick Insights</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-gray-600">
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="h-3 w-3 text-green-500" />
+                      <span>Total messages sent: {totalSent.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <CheckCircle className="h-3 w-3 text-blue-500" />
+                      <span>Delivery rate consistently above 96%</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Eye className="h-3 w-3 text-orange-500" />
+                      <span>Open rates trending upward</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Target className="h-3 w-3 text-purple-500" />
+                      <span>Click-through rates above industry average</span>
+                    </div>
+                  </div>
+                </div>
               </CardContent>
             </Card>
 
@@ -296,42 +510,121 @@ const Home = () => {
 
           {/* Enhanced Bottom Row */}
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
-            {/* Recent Campaigns */}
+            {/* Enhanced Recent Campaigns */}
             <Card className="xl:col-span-2 border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
               <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold text-gray-900">Recent Campaigns</CardTitle>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Recent Campaigns</CardTitle>
+                  <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg font-medium">
+                    Last 4 Campaigns
+                  </div>
+                </div>
               </CardHeader>
               <CardContent className="p-6 pt-0">
                 <div className="space-y-4">
                   {recentCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-5 bg-gray-50 border border-gray-100 rounded-xl hover:shadow-sm transition-all duration-200 space-y-3 sm:space-y-0">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-semibold text-gray-900 mb-2 text-base">{campaign.name}</h3>
-                        <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-sm text-gray-600">
-                          <span className="flex items-center">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                            Sent {campaign.sent}
-                          </span>
-                          <span className="hidden sm:inline">•</span>
-                          <span>{campaign.recipients.toLocaleString()} recipients</span>
+                    <div key={campaign.id} className="bg-gray-50 border border-gray-100 rounded-xl p-5 hover:shadow-sm transition-all duration-200">
+                      {/* Campaign Header */}
+                      <div className="flex flex-col lg:flex-row lg:items-start justify-between space-y-3 lg:space-y-0 mb-4">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center space-x-3 mb-2">
+                            <h3 className="font-semibold text-gray-900 text-base">{campaign.name}</h3>
+                            <div className={`flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                              campaign.status === 'completed' 
+                                ? 'bg-green-100 text-green-700' 
+                                : 'bg-yellow-100 text-yellow-700'
+                            }`}>
+                              <CheckCircle className="h-3 w-3 mr-1" />
+                              {campaign.status}
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2 font-medium">{campaign.subject}</p>
+                          <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500">
+                            <span className="flex items-center">
+                              <Clock className="h-3 w-3 mr-1" />
+                              Sent {campaign.sent}
+                            </span>
+                            <span className="flex items-center">
+                              <Users className="h-3 w-3 mr-1" />
+                              {campaign.recipients.toLocaleString()} recipients
+                            </span>
+                            <span className="flex items-center">
+                              <Target className="h-3 w-3 mr-1" />
+                              {campaign.segment}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-3">
+                          <div className="text-right">
+                            <p className="text-lg font-bold text-green-600">{campaign.revenue}</p>
+                            <p className="text-xs text-gray-500">Revenue Generated</p>
+                          </div>
+                          <div className={`p-2 rounded-full ${
+                            campaign.trend === 'up' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
+                          }`}>
+                            {campaign.trend === 'up' ? 
+                              <ArrowUp className="h-4 w-4" /> : 
+                              <ArrowDown className="h-4 w-4" />
+                            }
+                          </div>
                         </div>
                       </div>
-                      <div className="flex items-center justify-between sm:justify-end space-x-4">
-                        <div className="text-right">
-                          <p className="text-lg font-bold text-gray-900">{campaign.openRate}</p>
-                          <p className="text-xs text-gray-500">Open Rate</p>
+                      
+                      {/* Performance Metrics */}
+                      <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div className="text-center bg-white rounded-lg p-3 border border-gray-100">
+                          <p className="text-sm font-bold text-gray-900">{campaign.deliveryRate}</p>
+                          <p className="text-xs text-gray-500">Delivered</p>
+                          <p className="text-xs text-gray-400">{campaign.delivered.toLocaleString()}</p>
                         </div>
-                        <div className={`p-2 rounded-full ${
-                          campaign.trend === 'up' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-                        }`}>
-                          {campaign.trend === 'up' ? 
-                            <ArrowUp className="h-4 w-4" /> : 
-                            <ArrowDown className="h-4 w-4" />
-                          }
+                        <div className="text-center bg-white rounded-lg p-3 border border-gray-100">
+                          <p className="text-sm font-bold text-gray-900">{campaign.openRate}</p>
+                          <p className="text-xs text-gray-500">Opened</p>
+                          <p className="text-xs text-gray-400">{Math.round(campaign.recipients * parseFloat(campaign.openRate) / 100).toLocaleString()}</p>
+                        </div>
+                        <div className="text-center bg-white rounded-lg p-3 border border-gray-100">
+                          <p className="text-sm font-bold text-gray-900">{campaign.clickRate}</p>
+                          <p className="text-xs text-gray-500">Clicked</p>
+                          <p className="text-xs text-gray-400">{Math.round(campaign.recipients * parseFloat(campaign.clickRate) / 100).toLocaleString()}</p>
+                        </div>
+                        <div className="text-center bg-white rounded-lg p-3 border border-gray-100">
+                          <p className="text-sm font-bold text-gray-900">{campaign.bounces}</p>
+                          <p className="text-xs text-gray-500">Bounces</p>
+                          <p className="text-xs text-gray-400">{((campaign.bounces / campaign.recipients) * 100).toFixed(1)}%</p>
+                        </div>
+                        <div className="text-center bg-white rounded-lg p-3 border border-gray-100">
+                          <p className="text-sm font-bold text-gray-900">{campaign.unsubscribes}</p>
+                          <p className="text-xs text-gray-500">Unsubscribed</p>
+                          <p className="text-xs text-gray-400">{((campaign.unsubscribes / campaign.recipients) * 100).toFixed(2)}%</p>
                         </div>
                       </div>
                     </div>
                   ))}
+                </div>
+                
+                {/* Campaign Summary */}
+                <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+                  <h4 className="text-sm font-semibold text-blue-900 mb-2">Campaign Summary</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-blue-900">
+                        {recentCampaigns.reduce((sum, c) => sum + c.recipients, 0).toLocaleString()}
+                      </p>
+                      <p className="text-xs text-blue-700">Total Recipients</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-green-600">
+                        ${recentCampaigns.reduce((sum, c) => sum + parseFloat(c.revenue.replace('$', '').replace(',', '')), 0).toLocaleString()}
+                      </p>
+                      <p className="text-xs text-blue-700">Total Revenue</p>
+                    </div>
+                    <div className="text-center">
+                      <p className="text-lg font-bold text-orange-600">
+                        {(recentCampaigns.reduce((sum, c) => sum + parseFloat(c.openRate), 0) / recentCampaigns.length).toFixed(1)}%
+                      </p>
+                      <p className="text-xs text-blue-700">Avg Open Rate</p>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
