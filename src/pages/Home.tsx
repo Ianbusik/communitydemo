@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
@@ -86,46 +87,46 @@ const Home = () => {
     <SidebarProvider>
       <div className="flex min-h-screen w-full bg-gray-50">
         <AppSidebar />
-        <div className="flex-1 p-8 space-y-8 overflow-auto">
+        <div className="flex-1 p-6 lg:p-8 space-y-6 lg:space-y-8 overflow-auto">
           {/* Header Section */}
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
-              <p className="text-gray-600">Welcome back! Here's what's happening with your campaigns.</p>
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between space-y-4 lg:space-y-0">
+            <div className="min-w-0 flex-1">
+              <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2 break-words">Dashboard</h1>
+              <p className="text-gray-600 text-sm lg:text-base break-words">Welcome back! Here's what's happening with your campaigns.</p>
             </div>
-            <div className="text-right">
-              <div className="text-sm text-gray-500 mb-1">Last updated</div>
-              <div className="text-sm font-medium text-gray-900">{new Date().toLocaleString()}</div>
+            <div className="text-left lg:text-right flex-shrink-0">
+              <div className="text-xs lg:text-sm text-gray-500 mb-1">Last updated</div>
+              <div className="text-xs lg:text-sm font-medium text-gray-900 break-words">{new Date().toLocaleString()}</div>
             </div>
           </div>
 
           {/* Enhanced Stats Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {stats.map((stat, index) => (
               <Card key={index} className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                 <div className={`absolute inset-0 ${stat.color}`}>
                   <div className="absolute inset-0 bg-white/90 backdrop-blur-sm"></div>
                 </div>
-                <CardContent className="relative p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-4">
-                      <div className={`p-3 rounded-full ${stat.color} text-white shadow-lg`}>
-                        <stat.icon className="h-6 w-6" />
+                <CardContent className="relative p-4 lg:p-6">
+                  <div className="flex items-start justify-between space-x-3">
+                    <div className="flex items-start space-x-3 min-w-0 flex-1">
+                      <div className={`p-2 lg:p-3 rounded-full ${stat.color} text-white shadow-lg flex-shrink-0`}>
+                        <stat.icon className="h-4 w-4 lg:h-6 lg:w-6" />
                       </div>
-                      <div>
-                        <p className="text-sm font-medium text-gray-700 mb-1">{stat.title}</p>
-                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs lg:text-sm font-medium text-gray-700 mb-1 break-words">{stat.title}</p>
+                        <p className="text-lg lg:text-2xl font-bold text-gray-900 break-words leading-tight">{stat.value}</p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className={`flex items-center text-sm font-medium ${
+                    <div className="text-right flex-shrink-0">
+                      <div className={`flex items-center text-xs lg:text-sm font-medium ${
                         stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {stat.trend === 'up' ? 
-                          <ArrowUp className="h-4 w-4 mr-1" /> : 
-                          <ArrowDown className="h-4 w-4 mr-1" />
+                          <ArrowUp className="h-3 w-3 lg:h-4 lg:w-4 mr-1 flex-shrink-0" /> : 
+                          <ArrowDown className="h-3 w-3 lg:h-4 lg:w-4 mr-1 flex-shrink-0" />
                         }
-                        {stat.change}
+                        <span className="whitespace-nowrap">{stat.change}</span>
                       </div>
                     </div>
                   </div>
@@ -135,63 +136,68 @@ const Home = () => {
           </div>
 
           {/* Enhanced Charts Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 lg:gap-8">
             {/* Campaign Performance Chart */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-semibold text-gray-900">Campaign Performance</CardTitle>
-                  <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Last 7 Days</div>
+              <CardHeader className="pb-3 lg:pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
+                  <CardTitle className="text-lg lg:text-xl font-semibold text-gray-900 break-words">Campaign Performance</CardTitle>
+                  <div className="text-xs lg:text-sm text-gray-500 bg-gray-100 px-2 lg:px-3 py-1 rounded-full whitespace-nowrap">Last 7 Days</div>
                 </div>
               </CardHeader>
-              <CardContent className="p-6 pt-0">
-                <div className="h-80 w-full">
+              <CardContent className="p-4 lg:p-6 pt-0">
+                <div className="h-64 lg:h-80 w-full">
                   <ChartContainer config={chartConfig} className="h-full w-full">
-                    <LineChart data={campaignData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+                    <LineChart data={campaignData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                       <XAxis 
                         dataKey="date" 
-                        fontSize={12}
-                        tickMargin={8}
+                        fontSize={10}
+                        tickMargin={5}
                         stroke="#64748b"
+                        interval={0}
+                        angle={-45}
+                        textAnchor="end"
+                        height={60}
                       />
                       <YAxis 
-                        fontSize={12}
-                        tickMargin={8}
+                        fontSize={10}
+                        tickMargin={5}
                         stroke="#64748b"
+                        width={40}
                       />
                       <ChartTooltip content={<ChartTooltipContent />} />
                       <Line 
                         type="monotone" 
                         dataKey="sent" 
                         stroke="var(--color-sent)" 
-                        strokeWidth={3}
-                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
-                        activeDot={{ r: 7, strokeWidth: 2 }}
+                        strokeWidth={2}
+                        dot={{ r: 3, strokeWidth: 1, fill: "white" }}
+                        activeDot={{ r: 5, strokeWidth: 1 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="delivered" 
                         stroke="var(--color-delivered)" 
-                        strokeWidth={3}
-                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
-                        activeDot={{ r: 7, strokeWidth: 2 }}
+                        strokeWidth={2}
+                        dot={{ r: 3, strokeWidth: 1, fill: "white" }}
+                        activeDot={{ r: 5, strokeWidth: 1 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="opened" 
                         stroke="var(--color-opened)" 
-                        strokeWidth={3}
-                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
-                        activeDot={{ r: 7, strokeWidth: 2 }}
+                        strokeWidth={2}
+                        dot={{ r: 3, strokeWidth: 1, fill: "white" }}
+                        activeDot={{ r: 5, strokeWidth: 1 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="clicked" 
                         stroke="var(--color-clicked)" 
-                        strokeWidth={3}
-                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
-                        activeDot={{ r: 7, strokeWidth: 2 }}
+                        strokeWidth={2}
+                        dot={{ r: 3, strokeWidth: 1, fill: "white" }}
+                        activeDot={{ r: 5, strokeWidth: 1 }}
                       />
                     </LineChart>
                   </ChartContainer>
@@ -201,19 +207,29 @@ const Home = () => {
 
             {/* Audience Growth Chart */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="pb-4">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xl font-semibold text-gray-900">Audience Growth</CardTitle>
-                  <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Monthly</div>
+              <CardHeader className="pb-3 lg:pb-4">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
+                  <CardTitle className="text-lg lg:text-xl font-semibold text-gray-900 break-words">Audience Growth</CardTitle>
+                  <div className="text-xs lg:text-sm text-gray-500 bg-gray-100 px-2 lg:px-3 py-1 rounded-full whitespace-nowrap">Monthly</div>
                 </div>
               </CardHeader>
-              <CardContent className="p-6 pt-0">
-                <div className="h-80 w-full">
+              <CardContent className="p-4 lg:p-6 pt-0">
+                <div className="h-64 lg:h-80 w-full">
                   <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={audienceGrowthData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
+                    <BarChart data={audienceGrowthData} margin={{ top: 10, right: 10, left: 10, bottom: 10 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
-                      <XAxis dataKey="month" stroke="#64748b" />
-                      <YAxis stroke="#64748b" />
+                      <XAxis 
+                        dataKey="month" 
+                        stroke="#64748b" 
+                        fontSize={10}
+                        tickMargin={5}
+                      />
+                      <YAxis 
+                        stroke="#64748b" 
+                        fontSize={10}
+                        tickMargin={5}
+                        width={50}
+                      />
                       <ChartTooltip />
                       <Bar 
                         dataKey="subscribers" 
@@ -234,38 +250,38 @@ const Home = () => {
           </div>
 
           {/* Enhanced Bottom Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 lg:gap-8">
             {/* Recent Campaigns */}
-            <Card className="lg:col-span-2 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold text-gray-900">Recent Campaigns</CardTitle>
+            <Card className="xl:col-span-2 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-3 lg:pb-4">
+                <CardTitle className="text-lg lg:text-xl font-semibold text-gray-900 break-words">Recent Campaigns</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
+              <CardContent className="p-4 lg:p-6 pt-0">
+                <div className="space-y-3 lg:space-y-4">
                   {recentCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="flex items-center justify-between p-5 bg-gradient-to-r from-gray-50 to-white border border-gray-100 rounded-xl hover:shadow-md transition-all duration-200 hover:scale-[1.02]">
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-gray-900 mb-2">{campaign.name}</h3>
-                        <div className="flex items-center space-x-4 text-sm text-gray-600">
+                    <div key={campaign.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 lg:p-5 bg-gradient-to-r from-gray-50 to-white border border-gray-100 rounded-xl hover:shadow-md transition-all duration-200 hover:scale-[1.02] space-y-3 sm:space-y-0">
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-gray-900 mb-2 break-words text-sm lg:text-base">{campaign.name}</h3>
+                        <div className="flex flex-col sm:flex-row sm:items-center space-y-1 sm:space-y-0 sm:space-x-4 text-xs lg:text-sm text-gray-600">
                           <span className="flex items-center">
-                            <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
-                            Sent {campaign.sent}
+                            <div className="w-2 h-2 bg-blue-500 rounded-full mr-2 flex-shrink-0"></div>
+                            <span className="break-words">Sent {campaign.sent}</span>
                           </span>
-                          <span>•</span>
-                          <span>{campaign.recipients.toLocaleString()} recipients</span>
+                          <span className="hidden sm:inline">•</span>
+                          <span className="break-words">{campaign.recipients.toLocaleString()} recipients</span>
                         </div>
                       </div>
-                      <div className="text-right flex items-center space-x-3">
-                        <div>
-                          <p className="text-lg font-bold text-gray-900">{campaign.openRate}</p>
-                          <p className="text-xs text-gray-500">Open Rate</p>
+                      <div className="flex items-center justify-between sm:justify-end space-x-3 flex-shrink-0">
+                        <div className="text-right">
+                          <p className="text-base lg:text-lg font-bold text-gray-900 whitespace-nowrap">{campaign.openRate}</p>
+                          <p className="text-xs text-gray-500 whitespace-nowrap">Open Rate</p>
                         </div>
                         <div className={`p-2 rounded-full ${
                           campaign.trend === 'up' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
-                        }`}>
+                        } flex-shrink-0`}>
                           {campaign.trend === 'up' ? 
-                            <ArrowUp className="h-4 w-4" /> : 
-                            <ArrowDown className="h-4 w-4" />
+                            <ArrowUp className="h-3 w-3 lg:h-4 lg:w-4" /> : 
+                            <ArrowDown className="h-3 w-3 lg:h-4 lg:w-4" />
                           }
                         </div>
                       </div>
@@ -277,19 +293,19 @@ const Home = () => {
 
             {/* Message Types Distribution */}
             <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold text-gray-900">Message Types</CardTitle>
+              <CardHeader className="pb-3 lg:pb-4">
+                <CardTitle className="text-lg lg:text-xl font-semibold text-gray-900 break-words">Message Types</CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="h-64 mb-4">
+              <CardContent className="p-4 lg:p-6 pt-0">
+                <div className="h-48 lg:h-64 mb-4">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
                         data={messageTypesData}
                         cx="50%"
                         cy="50%"
-                        outerRadius={80}
-                        innerRadius={40}
+                        outerRadius="80%"
+                        innerRadius="40%"
                         dataKey="value"
                         stroke="white"
                         strokeWidth={2}
@@ -302,17 +318,17 @@ const Home = () => {
                     </PieChart>
                   </ResponsiveContainer>
                 </div>
-                <div className="space-y-3">
+                <div className="space-y-2 lg:space-y-3">
                   {messageTypesData.map((item, index) => (
                     <div key={index} className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
+                      <div className="flex items-center space-x-2 lg:space-x-3 min-w-0 flex-1">
                         <div 
-                          className="w-3 h-3 rounded-full" 
+                          className="w-3 h-3 rounded-full flex-shrink-0" 
                           style={{ backgroundColor: item.color }}
                         ></div>
-                        <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                        <span className="text-xs lg:text-sm font-medium text-gray-700 break-words">{item.name}</span>
                       </div>
-                      <span className="text-sm font-semibold text-gray-900">{item.value}%</span>
+                      <span className="text-xs lg:text-sm font-semibold text-gray-900 flex-shrink-0 ml-2">{item.value}%</span>
                     </div>
                   ))}
                 </div>
