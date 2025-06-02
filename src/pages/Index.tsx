@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, ChevronDown, Check, Settings, ExternalLink } from 'lucide-react';
+import { Search, ChevronDown, Check, Settings, ExternalLink, Bot, Smartphone, Type, BarChart3, Shield, MessageCircle, ClipboardList, QrCode, Globe, Monitor, Link, CheckCircle, FileText, Palette, HandHeart, Zap, Wrench, ShoppingBag, Cloud, TrendingUp, Download, Moon, Phone } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -12,7 +12,7 @@ interface AddOn {
   name: string;
   description: string;
   category: string;
-  icon: string;
+  icon: React.ComponentType<{ className?: string }>;
   status: 'connected' | 'available' | 'setup';
   featured?: boolean;
   popular?: boolean;
@@ -20,39 +20,39 @@ interface AddOn {
 
 const addOns: AddOn[] = [
   // Messaging
-  { id: '1', name: 'AI Message Generator (Beta)', description: 'Generate messages using AI', category: 'Messaging', icon: '🤖', status: 'available', featured: true },
-  { id: '2', name: 'Send Media using MMS', description: 'Send photos, videos, and files', category: 'Messaging', icon: '📱', status: 'connected', featured: true },
-  { id: '3', name: 'Keyword Responders', description: 'Automatically respond to specific words', category: 'Messaging', icon: '🔤', status: 'setup' },
-  { id: '4', name: 'Custom Member Data', description: 'Collect custom data on new members', category: 'Messaging', icon: '📊', status: 'available' },
-  { id: '5', name: 'Filter Offensive Content', description: 'Block messages with profanity', category: 'Messaging', icon: '🛡️', status: 'available' },
-  { id: '6', name: 'Pre-Purchase Messages', description: 'Send messages before checkout', category: 'Messaging', icon: '💬', status: 'available' },
+  { id: '1', name: 'AI Message Generator (Beta)', description: 'Generate messages using AI', category: 'Messaging', icon: Bot, status: 'available', featured: true },
+  { id: '2', name: 'Send Media using MMS', description: 'Send photos, videos, and files', category: 'Messaging', icon: Smartphone, status: 'connected', featured: true },
+  { id: '3', name: 'Keyword Responders', description: 'Automatically respond to specific words', category: 'Messaging', icon: Type, status: 'setup' },
+  { id: '4', name: 'Custom Member Data', description: 'Collect custom data on new members', category: 'Messaging', icon: BarChart3, status: 'available' },
+  { id: '5', name: 'Filter Offensive Content', description: 'Block messages with profanity', category: 'Messaging', icon: Shield, status: 'available' },
+  { id: '6', name: 'Pre-Purchase Messages', description: 'Send messages before checkout', category: 'Messaging', icon: MessageCircle, status: 'available' },
 
   // Grow Your List
-  { id: '7', name: 'List Imports', description: 'Import your existing customer list', category: 'Grow Your List', icon: '📋', status: 'connected', featured: true },
-  { id: '8', name: 'QR Code', description: 'Generate QR code customers can scan', category: 'Grow Your List', icon: '📱', status: 'available', featured: true },
-  { id: '9', name: 'Website Popup', description: 'Capture visitors with popup forms', category: 'Grow Your List', icon: '🌐', status: 'setup' },
-  { id: '10', name: 'Website Embed', description: 'Embed signup forms on your site', category: 'Grow Your List', icon: '💻', status: 'available' },
-  { id: '11', name: 'Integrate External Forms', description: 'Connect your existing forms', category: 'Grow Your List', icon: '🔗', status: 'available' },
+  { id: '7', name: 'List Imports', description: 'Import your existing customer list', category: 'Grow Your List', icon: ClipboardList, status: 'connected', featured: true },
+  { id: '8', name: 'QR Code', description: 'Generate QR code customers can scan', category: 'Grow Your List', icon: QrCode, status: 'available', featured: true },
+  { id: '9', name: 'Website Popup', description: 'Capture visitors with popup forms', category: 'Grow Your List', icon: Globe, status: 'setup' },
+  { id: '10', name: 'Website Embed', description: 'Embed signup forms on your site', category: 'Grow Your List', icon: Monitor, status: 'available' },
+  { id: '11', name: 'Integrate External Forms', description: 'Connect your existing forms', category: 'Grow Your List', icon: Link, status: 'available' },
 
   // Onboarding Experience
-  { id: '12', name: 'Reply Y', description: 'Create drip sequences for new members', category: 'Onboarding Experience', icon: '✅', status: 'available', featured: true },
-  { id: '13', name: 'Custom Signup Fields', description: 'Collect custom data during signup', category: 'Onboarding Experience', icon: '📝', status: 'setup' },
-  { id: '14', name: 'Custom Branded Signup', description: 'Create branded signup experiences', category: 'Onboarding Experience', icon: '🎨', status: 'available' },
-  { id: '15', name: 'Welcome Series', description: 'Send a series of welcome messages', category: 'Onboarding Experience', icon: '👋', status: 'connected' },
+  { id: '12', name: 'Reply Y', description: 'Create drip sequences for new members', category: 'Onboarding Experience', icon: CheckCircle, status: 'available', featured: true },
+  { id: '13', name: 'Custom Signup Fields', description: 'Collect custom data during signup', category: 'Onboarding Experience', icon: FileText, status: 'setup' },
+  { id: '14', name: 'Custom Branded Signup', description: 'Create branded signup experiences', category: 'Onboarding Experience', icon: Palette, status: 'available' },
+  { id: '15', name: 'Welcome Series', description: 'Send a series of welcome messages', category: 'Onboarding Experience', icon: HandHeart, status: 'connected' },
 
   // Developer Tools & Integrations
-  { id: '16', name: 'API', description: 'Programmatically send messages and manage lists', category: 'Developer Tools & Integrations', icon: '⚡', status: 'available', featured: true },
-  { id: '17', name: 'Zapier', description: 'Connect to 2000+ apps via Zapier', category: 'Developer Tools & Integrations', icon: '🔧', status: 'connected', popular: true },
-  { id: '18', name: 'Shopify', description: 'Integrate with your Shopify store', category: 'Developer Tools & Integrations', icon: '🛍️', status: 'connected' },
-  { id: '19', name: 'Salesforce', description: 'Sync your customer data', category: 'Developer Tools & Integrations', icon: '☁️', status: 'available' },
+  { id: '16', name: 'API', description: 'Programmatically send messages and manage lists', category: 'Developer Tools & Integrations', icon: Zap, status: 'available', featured: true },
+  { id: '17', name: 'Zapier', description: 'Connect to 2000+ apps via Zapier', category: 'Developer Tools & Integrations', icon: Wrench, status: 'connected', popular: true },
+  { id: '18', name: 'Shopify', description: 'Integrate with your Shopify store', category: 'Developer Tools & Integrations', icon: ShoppingBag, status: 'connected' },
+  { id: '19', name: 'Salesforce', description: 'Sync your customer data', category: 'Developer Tools & Integrations', icon: Cloud, status: 'available' },
 
   // Reporting & Tracking
-  { id: '20', name: 'UTM Tracking', description: 'Track link performance', category: 'Reporting & Tracking', icon: '📈', status: 'available', featured: true },
-  { id: '21', name: 'Data Exports', description: 'Export your community data', category: 'Reporting & Tracking', icon: '📊', status: 'connected' },
+  { id: '20', name: 'UTM Tracking', description: 'Track link performance', category: 'Reporting & Tracking', icon: TrendingUp, status: 'available', featured: true },
+  { id: '21', name: 'Data Exports', description: 'Export your community data', category: 'Reporting & Tracking', icon: Download, status: 'connected' },
 
   // Other Features
-  { id: '22', name: 'iOS App', description: 'Download the Community iOS app', category: 'Other Features', icon: '📱', status: 'available' },
-  { id: '23', name: 'Dark Mode', description: 'Switch your dashboard appearance', category: 'Other Features', icon: '🌙', status: 'connected' }
+  { id: '22', name: 'iOS App', description: 'Download the Community iOS app', category: 'Other Features', icon: Smartphone, status: 'available' },
+  { id: '23', name: 'Dark Mode', description: 'Switch your dashboard appearance', category: 'Other Features', icon: Moon, status: 'connected' }
 ];
 
 const categories = [
@@ -244,7 +244,9 @@ const Index = () => {
                               >
                                 <CardContent className="p-4">
                                   <div className="flex items-start space-x-3">
-                                    <div className="text-2xl">{addon.icon}</div>
+                                    <div className="text-blue-600">
+                                      <addon.icon className="w-6 h-6" />
+                                    </div>
                                     <div className="flex-1 min-w-0">
                                       <div className="flex items-center space-x-2 mb-1">
                                         <h3 className="font-medium text-gray-900 truncate">{addon.name}</h3>
@@ -288,7 +290,7 @@ const Index = () => {
               {/* No Results */}
               {filteredAddOns.length === 0 && (
                 <div className="text-center py-12">
-                  <div className="text-gray-400 text-4xl mb-4">🔍</div>
+                  <Search className="mx-auto text-gray-400 w-12 h-12 mb-4" />
                   <h3 className="text-lg font-medium text-gray-900 mb-2">No add-ons found</h3>
                   <p className="text-gray-500">Try adjusting your search or filter criteria</p>
                 </div>
