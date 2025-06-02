@@ -36,7 +36,7 @@ export const CampaignPerformanceChart: React.FC = () => {
     }));
   };
 
-  // Custom label component for displaying values on points
+  // Custom label component with better visibility
   const CustomLabel = (props: any) => {
     const { x, y, value, dataKey } = props;
     if (!visibleLines[dataKey as keyof typeof visibleLines]) return null;
@@ -44,12 +44,15 @@ export const CampaignPerformanceChart: React.FC = () => {
     return (
       <text 
         x={x} 
-        y={y - 8} 
+        y={y - 12} 
         fill={chartConfig[dataKey]?.color || '#666'} 
         textAnchor="middle" 
         dominantBaseline="middle"
-        fontSize={10}
-        fontWeight="500"
+        fontSize={11}
+        fontWeight="600"
+        stroke="white"
+        strokeWidth={3}
+        paintOrder="stroke"
       >
         {value.toLocaleString()}
       </text>
@@ -161,7 +164,7 @@ export const CampaignPerformanceChart: React.FC = () => {
         </div>
       </CardHeader>
       <CardContent className="p-6 pt-0">
-        <div className="h-96 w-full">
+        <div className="h-80 w-full mb-6">
           <ChartContainer config={chartConfig} className="h-full w-full">
             <LineChart data={campaignData} margin={{ top: 40, right: 20, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
@@ -232,6 +235,39 @@ export const CampaignPerformanceChart: React.FC = () => {
               )}
             </LineChart>
           </ChartContainer>
+        </div>
+
+        {/* Data Table for At-a-Glance View */}
+        <div className="mt-6 bg-gray-50 rounded-lg p-4">
+          <h4 className="text-sm font-semibold text-gray-900 mb-3">Daily Performance Data</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-gray-200">
+                  <th className="text-left py-2 font-medium text-gray-600">Day</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Sent</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Delivered</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Opened</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Clicked</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Open Rate</th>
+                  <th className="text-right py-2 font-medium text-gray-600">Click Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                {campaignData.map((day, index) => (
+                  <tr key={index} className="border-b border-gray-100 hover:bg-white transition-colors">
+                    <td className="py-2 font-medium text-gray-900">{day.date}</td>
+                    <td className="text-right py-2 text-gray-700">{day.sent.toLocaleString()}</td>
+                    <td className="text-right py-2 text-gray-700">{day.delivered.toLocaleString()}</td>
+                    <td className="text-right py-2 text-gray-700">{day.opened.toLocaleString()}</td>
+                    <td className="text-right py-2 text-gray-700">{day.clicked.toLocaleString()}</td>
+                    <td className="text-right py-2 text-gray-700">{day.openRate.toFixed(1)}%</td>
+                    <td className="text-right py-2 text-gray-700">{day.clickRate.toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
         
         {/* Enhanced Quick Insights */}
