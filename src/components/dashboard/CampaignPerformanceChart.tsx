@@ -1,8 +1,7 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, LabelList } from 'recharts';
 import { Mail, Eye, MousePointer, Star, TrendingUp, CheckCircle, Target, BarChart3 } from 'lucide-react';
 import { campaignData, chartConfig } from './DashboardData';
 import { Button } from "@/components/ui/button";
@@ -165,7 +164,7 @@ export const CampaignPerformanceChart: React.FC = () => {
       </CardHeader>
       <CardContent className="p-6 pt-0">
         <div className="h-80 w-full mb-6">
-          <ChartContainer config={chartConfig} className="h-full w-full">
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={campaignData} margin={{ top: 40, right: 20, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis 
@@ -184,12 +183,11 @@ export const CampaignPerformanceChart: React.FC = () => {
                 stroke="#64748b"
                 width={60}
               />
-              <ChartTooltip content={<CustomTooltip />} />
               {visibleLines.sent && (
                 <Line 
                   type="monotone" 
                   dataKey="sent" 
-                  stroke="var(--color-sent)" 
+                  stroke={chartConfig.sent.color}
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
@@ -201,7 +199,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                 <Line 
                   type="monotone" 
                   dataKey="delivered" 
-                  stroke="var(--color-delivered)" 
+                  stroke={chartConfig.delivered.color}
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
@@ -213,7 +211,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                 <Line 
                   type="monotone" 
                   dataKey="opened" 
-                  stroke="var(--color-opened)" 
+                  stroke={chartConfig.opened.color}
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
@@ -225,7 +223,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                 <Line 
                   type="monotone" 
                   dataKey="clicked" 
-                  stroke="var(--color-clicked)" 
+                  stroke={chartConfig.clicked.color}
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
@@ -234,7 +232,7 @@ export const CampaignPerformanceChart: React.FC = () => {
                 </Line>
               )}
             </LineChart>
-          </ChartContainer>
+          </ResponsiveContainer>
         </div>
 
         {/* Data Table for At-a-Glance View */}

@@ -1,4 +1,3 @@
-
 import { 
   Users, 
   Mail, 
@@ -64,19 +63,19 @@ export const campaignData = [
 export const chartConfig = {
   sent: {
     label: "Sent",
-    color: "hsl(var(--chart-1))"
+    color: "#3b82f6"
   },
   delivered: {
     label: "Delivered", 
-    color: "hsl(var(--chart-2))"
+    color: "#10b981"
   },
   opened: {
     label: "Opened",
-    color: "hsl(var(--chart-3))"
+    color: "#f59e0b"
   },
   clicked: {
     label: "Clicked",
-    color: "hsl(var(--chart-4))"
+    color: "#8b5cf6"
   }
 };
 
