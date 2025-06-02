@@ -7,6 +7,7 @@ import { CampaignStats } from "@/components/campaigns/CampaignStats";
 import { MessagePreview } from "@/components/campaigns/MessagePreview";
 import { ResponseSection } from "@/components/campaigns/ResponseSection";
 import { CampaignAnalytics } from "@/components/campaigns/CampaignAnalytics";
+import { CampaignActions } from "@/components/campaigns/CampaignActions";
 
 const Campaigns = () => {
   const [selectedCampaign] = useState({
@@ -23,6 +24,16 @@ const Campaigns = () => {
       <div className="flex min-h-screen w-full">
         <AppSidebar />
         <div className="flex-1 flex flex-col">
+          <div className="border-b border-gray-200 p-6">
+            <div className="flex justify-between items-start mb-4">
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Campaigns</h1>
+                <p className="text-gray-600 mt-1">Manage and create your SMS campaigns</p>
+              </div>
+              <CampaignActions />
+            </div>
+          </div>
+          
           <CampaignHeader campaign={selectedCampaign} />
           
           <div className="flex-1 flex">
