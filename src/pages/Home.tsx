@@ -13,7 +13,7 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const Home = () => {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-gray-50 dark:bg-gray-900">
+      <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
         <div className="flex-1 p-6 lg:p-8 space-y-6 lg:space-y-8 overflow-auto">
           {/* Theme Toggle */}

@@ -8,7 +8,7 @@ export const StatsCards: React.FC = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {stats.map((stat, index) => (
-        <Card key={index} className="relative overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-200 bg-white">
+        <Card key={index} className="relative overflow-hidden border-0 shadow-sm hover:shadow-md transition-all duration-200 bg-card">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="flex-1 min-w-0">
@@ -17,11 +17,11 @@ export const StatsCards: React.FC = () => {
                     <stat.icon className="h-5 w-5" />
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm font-medium text-gray-600">{stat.title}</span>
+                    <span className="text-sm font-medium text-muted-foreground">{stat.title}</span>
                     <div className={`flex items-center text-xs font-semibold px-2 py-1 rounded-full ${
                       stat.trend === 'up' 
-                        ? 'text-green-700 bg-green-100' 
-                        : 'text-red-700 bg-red-100'
+                        ? 'text-green-700 bg-green-100 dark:text-green-400 dark:bg-green-900/30' 
+                        : 'text-red-700 bg-red-100 dark:text-red-400 dark:bg-red-900/30'
                     }`}>
                       {stat.trend === 'up' ? 
                         <ArrowUp className="h-3 w-3 mr-1" /> : 
@@ -32,9 +32,9 @@ export const StatsCards: React.FC = () => {
                   </div>
                 </div>
                 <div className="space-y-1">
-                  <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                  <p className="text-2xl font-bold text-foreground">{stat.value}</p>
                   {stat.subtitle && (
-                    <p className="text-sm text-gray-600">{stat.subtitle}</p>
+                    <p className="text-sm text-muted-foreground">{stat.subtitle}</p>
                   )}
                 </div>
               </div>
