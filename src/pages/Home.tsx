@@ -4,7 +4,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
-import { MessageSquare, Users, TrendingUp, Calendar } from 'lucide-react';
+import { MessageSquare, Users, TrendingUp, Calendar, ArrowUp, ArrowDown } from 'lucide-react';
 
 const Home = () => {
   const campaignData = [
@@ -34,10 +34,10 @@ const Home = () => {
   ];
 
   const recentCampaigns = [
-    { id: 1, name: 'Summer Sale Campaign', sent: '2 hours ago', recipients: 15420, openRate: '24.5%' },
-    { id: 2, name: 'Product Update Newsletter', sent: '1 day ago', recipients: 12300, openRate: '31.2%' },
-    { id: 3, name: 'Welcome Series - Part 3', sent: '2 days ago', recipients: 8750, openRate: '42.1%' },
-    { id: 4, name: 'Flash Sale Alert', sent: '3 days ago', recipients: 18600, openRate: '18.7%' },
+    { id: 1, name: 'Summer Sale Campaign', sent: '2 hours ago', recipients: 15420, openRate: '24.5%', trend: 'up' },
+    { id: 2, name: 'Product Update Newsletter', sent: '1 day ago', recipients: 12300, openRate: '31.2%', trend: 'up' },
+    { id: 3, name: 'Welcome Series - Part 3', sent: '2 days ago', recipients: 8750, openRate: '42.1%', trend: 'up' },
+    { id: 4, name: 'Flash Sale Alert', sent: '3 days ago', recipients: 18600, openRate: '18.7%', trend: 'down' },
   ];
 
   const chartConfig = {
@@ -47,118 +47,151 @@ const Home = () => {
     clicked: { label: "Clicked", color: "#ef4444" },
   };
 
+  const stats = [
+    {
+      title: "Total Messages",
+      value: "127,543",
+      icon: MessageSquare,
+      color: "bg-gradient-to-br from-blue-500 to-blue-600",
+      change: "+12.5%",
+      trend: "up"
+    },
+    {
+      title: "Active Subscribers",
+      value: "18,247",
+      icon: Users,
+      color: "bg-gradient-to-br from-green-500 to-green-600",
+      change: "+8.3%",
+      trend: "up"
+    },
+    {
+      title: "Open Rate",
+      value: "24.8%",
+      icon: TrendingUp,
+      color: "bg-gradient-to-br from-orange-500 to-orange-600",
+      change: "+2.1%",
+      trend: "up"
+    },
+    {
+      title: "This Month",
+      value: "89 Campaigns",
+      icon: Calendar,
+      color: "bg-gradient-to-br from-purple-500 to-purple-600",
+      change: "+15.2%",
+      trend: "up"
+    }
+  ];
+
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full">
+      <div className="flex min-h-screen w-full bg-gray-50">
         <AppSidebar />
-        <div className="flex-1 p-6 space-y-6 overflow-auto">
+        <div className="flex-1 p-8 space-y-8 overflow-auto">
+          {/* Header Section */}
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <div className="text-sm text-gray-500">
-              Last updated: {new Date().toLocaleString()}
+            <div>
+              <h1 className="text-4xl font-bold text-gray-900 mb-2">Dashboard</h1>
+              <p className="text-gray-600">Welcome back! Here's what's happening with your campaigns.</p>
+            </div>
+            <div className="text-right">
+              <div className="text-sm text-gray-500 mb-1">Last updated</div>
+              <div className="text-sm font-medium text-gray-900">{new Date().toLocaleString()}</div>
             </div>
           </div>
 
-          {/* Quick Stats */}
+          {/* Enhanced Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <MessageSquare className="h-8 w-8 text-blue-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Total Messages</p>
-                    <p className="text-2xl font-bold text-gray-900">127,543</p>
-                  </div>
+            {stats.map((stat, index) => (
+              <Card key={index} className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <div className={`absolute inset-0 ${stat.color}`}>
+                  <div className="absolute inset-0 bg-white/90 backdrop-blur-sm"></div>
                 </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <Users className="h-8 w-8 text-green-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Active Subscribers</p>
-                    <p className="text-2xl font-bold text-gray-900">18,247</p>
+                <CardContent className="relative p-6">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className={`p-3 rounded-full ${stat.color} text-white shadow-lg`}>
+                        <stat.icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 mb-1">{stat.title}</p>
+                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className={`flex items-center text-sm font-medium ${
+                        stat.trend === 'up' ? 'text-green-600' : 'text-red-600'
+                      }`}>
+                        {stat.trend === 'up' ? 
+                          <ArrowUp className="h-4 w-4 mr-1" /> : 
+                          <ArrowDown className="h-4 w-4 mr-1" />
+                        }
+                        {stat.change}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <TrendingUp className="h-8 w-8 text-orange-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">Open Rate</p>
-                    <p className="text-2xl font-bold text-gray-900">24.8%</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardContent className="p-6">
-                <div className="flex items-center">
-                  <Calendar className="h-8 w-8 text-purple-600" />
-                  <div className="ml-4">
-                    <p className="text-sm font-medium text-gray-600">This Month</p>
-                    <p className="text-2xl font-bold text-gray-900">89 Campaigns</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
-          {/* Charts Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Enhanced Charts Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Campaign Performance Chart */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Campaign Performance (Last 7 Days)</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Campaign Performance</CardTitle>
+                  <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Last 7 Days</div>
+                </div>
               </CardHeader>
-              <CardContent className="p-4">
+              <CardContent className="p-6 pt-0">
                 <div className="h-80 w-full">
                   <ChartContainer config={chartConfig} className="h-full w-full">
                     <LineChart data={campaignData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
                       <XAxis 
                         dataKey="date" 
                         fontSize={12}
                         tickMargin={8}
+                        stroke="#64748b"
                       />
                       <YAxis 
                         fontSize={12}
                         tickMargin={8}
+                        stroke="#64748b"
                       />
                       <ChartTooltip content={<ChartTooltipContent />} />
                       <Line 
                         type="monotone" 
                         dataKey="sent" 
                         stroke="var(--color-sent)" 
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
+                        strokeWidth={3}
+                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                        activeDot={{ r: 7, strokeWidth: 2 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="delivered" 
                         stroke="var(--color-delivered)" 
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
+                        strokeWidth={3}
+                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                        activeDot={{ r: 7, strokeWidth: 2 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="opened" 
                         stroke="var(--color-opened)" 
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
+                        strokeWidth={3}
+                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                        activeDot={{ r: 7, strokeWidth: 2 }}
                       />
                       <Line 
                         type="monotone" 
                         dataKey="clicked" 
                         stroke="var(--color-clicked)" 
-                        strokeWidth={2}
-                        dot={{ r: 4 }}
+                        strokeWidth={3}
+                        dot={{ r: 5, strokeWidth: 2, fill: "white" }}
+                        activeDot={{ r: 7, strokeWidth: 2 }}
                       />
                     </LineChart>
                   </ChartContainer>
@@ -167,19 +200,32 @@ const Home = () => {
             </Card>
 
             {/* Audience Growth Chart */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Audience Growth</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-xl font-semibold text-gray-900">Audience Growth</CardTitle>
+                  <div className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">Monthly</div>
+                </div>
               </CardHeader>
-              <CardContent className="p-4">
+              <CardContent className="p-6 pt-0">
                 <div className="h-80 w-full">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={audienceGrowthData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+                      <XAxis dataKey="month" stroke="#64748b" />
+                      <YAxis stroke="#64748b" />
                       <ChartTooltip />
-                      <Bar dataKey="subscribers" fill="#3b82f6" />
+                      <Bar 
+                        dataKey="subscribers" 
+                        fill="url(#barGradient)" 
+                        radius={[4, 4, 0, 0]}
+                      />
+                      <defs>
+                        <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="100%" stopColor="#1e40af" />
+                        </linearGradient>
+                      </defs>
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -187,24 +233,41 @@ const Home = () => {
             </Card>
           </div>
 
-          {/* Bottom Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Enhanced Bottom Row */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Recent Campaigns */}
-            <Card className="lg:col-span-2">
-              <CardHeader>
-                <CardTitle>Recent Campaigns</CardTitle>
+            <Card className="lg:col-span-2 border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-gray-900">Recent Campaigns</CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {recentCampaigns.map((campaign) => (
-                    <div key={campaign.id} className="flex items-center justify-between p-4 border rounded-lg">
-                      <div>
-                        <h3 className="font-medium text-gray-900">{campaign.name}</h3>
-                        <p className="text-sm text-gray-500">Sent {campaign.sent} • {campaign.recipients.toLocaleString()} recipients</p>
+                    <div key={campaign.id} className="flex items-center justify-between p-5 bg-gradient-to-r from-gray-50 to-white border border-gray-100 rounded-xl hover:shadow-md transition-all duration-200 hover:scale-[1.02]">
+                      <div className="flex-1">
+                        <h3 className="font-semibold text-gray-900 mb-2">{campaign.name}</h3>
+                        <div className="flex items-center space-x-4 text-sm text-gray-600">
+                          <span className="flex items-center">
+                            <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
+                            Sent {campaign.sent}
+                          </span>
+                          <span>•</span>
+                          <span>{campaign.recipients.toLocaleString()} recipients</span>
+                        </div>
                       </div>
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{campaign.openRate}</p>
-                        <p className="text-xs text-gray-500">Open Rate</p>
+                      <div className="text-right flex items-center space-x-3">
+                        <div>
+                          <p className="text-lg font-bold text-gray-900">{campaign.openRate}</p>
+                          <p className="text-xs text-gray-500">Open Rate</p>
+                        </div>
+                        <div className={`p-2 rounded-full ${
+                          campaign.trend === 'up' ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'
+                        }`}>
+                          {campaign.trend === 'up' ? 
+                            <ArrowUp className="h-4 w-4" /> : 
+                            <ArrowDown className="h-4 w-4" />
+                          }
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -213,12 +276,12 @@ const Home = () => {
             </Card>
 
             {/* Message Types Distribution */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Message Types</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <CardHeader className="pb-4">
+                <CardTitle className="text-xl font-semibold text-gray-900">Message Types</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="h-64">
+                <div className="h-64 mb-4">
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart>
                       <Pie
@@ -226,8 +289,10 @@ const Home = () => {
                         cx="50%"
                         cy="50%"
                         outerRadius={80}
+                        innerRadius={40}
                         dataKey="value"
-                        label={({ name, value }) => `${name}: ${value}%`}
+                        stroke="white"
+                        strokeWidth={2}
                       >
                         {messageTypesData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
@@ -236,6 +301,20 @@ const Home = () => {
                       <ChartTooltip />
                     </PieChart>
                   </ResponsiveContainer>
+                </div>
+                <div className="space-y-3">
+                  {messageTypesData.map((item, index) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        <div 
+                          className="w-3 h-3 rounded-full" 
+                          style={{ backgroundColor: item.color }}
+                        ></div>
+                        <span className="text-sm font-medium text-gray-700">{item.name}</span>
+                      </div>
+                      <span className="text-sm font-semibold text-gray-900">{item.value}%</span>
+                    </div>
+                  ))}
                 </div>
               </CardContent>
             </Card>
