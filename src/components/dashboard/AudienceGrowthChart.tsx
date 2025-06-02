@@ -17,42 +17,42 @@ export const AudienceGrowthChart: React.FC = () => {
   );
 
   return (
-    <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-white">
+    <Card className="border-0 shadow-sm hover:shadow-md transition-shadow duration-200 bg-card">
       <CardHeader className="pb-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-2 sm:space-y-0">
-          <CardTitle className="text-xl font-semibold text-gray-900">Audience Growth</CardTitle>
-          <div className="text-sm text-gray-500 bg-gray-50 px-3 py-1.5 rounded-lg font-medium">Last 6 Months</div>
+          <CardTitle className="text-xl font-semibold text-foreground">Audience Growth</CardTitle>
+          <div className="text-sm text-muted-foreground bg-muted px-3 py-1.5 rounded-lg font-medium">Last 6 Months</div>
         </div>
         
         {/* Growth Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mt-4">
-          <div className="bg-green-50 rounded-lg p-3 border border-green-100">
+          <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-3 border border-green-100 dark:border-green-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <UserPlus className="h-4 w-4 text-green-600" />
-              <span className="text-xs font-medium text-green-800">New This Month</span>
+              <UserPlus className="h-4 w-4 text-green-600 dark:text-green-400" />
+              <span className="text-xs font-medium text-green-800 dark:text-green-200">New This Month</span>
             </div>
-            <p className="text-lg font-bold text-green-900">{currentMonth.newSubscribers.toLocaleString()}</p>
+            <p className="text-lg font-bold text-green-900 dark:text-green-100">{currentMonth.newSubscribers.toLocaleString()}</p>
           </div>
-          <div className="bg-blue-50 rounded-lg p-3 border border-blue-100">
+          <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-3 border border-blue-100 dark:border-blue-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <TrendingUp className="h-4 w-4 text-blue-600" />
-              <span className="text-xs font-medium text-blue-800">Growth Rate</span>
+              <TrendingUp className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+              <span className="text-xs font-medium text-blue-800 dark:text-blue-200">Growth Rate</span>
             </div>
-            <p className="text-lg font-bold text-blue-900">{currentMonth.growthRate}%</p>
+            <p className="text-lg font-bold text-blue-900 dark:text-blue-100">{currentMonth.growthRate}%</p>
           </div>
-          <div className="bg-purple-50 rounded-lg p-3 border border-purple-100">
+          <div className="bg-purple-50 dark:bg-purple-950/30 rounded-lg p-3 border border-purple-100 dark:border-purple-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <Zap className="h-4 w-4 text-purple-600" />
-              <span className="text-xs font-medium text-purple-800">Engagement</span>
+              <Zap className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+              <span className="text-xs font-medium text-purple-800 dark:text-purple-200">Engagement</span>
             </div>
-            <p className="text-lg font-bold text-purple-900">{currentMonth.engagementRate}%</p>
+            <p className="text-lg font-bold text-purple-900 dark:text-purple-100">{currentMonth.engagementRate}%</p>
           </div>
-          <div className="bg-orange-50 rounded-lg p-3 border border-orange-100">
+          <div className="bg-orange-50 dark:bg-orange-950/30 rounded-lg p-3 border border-orange-100 dark:border-orange-900/50">
             <div className="flex items-center space-x-2 mb-1">
-              <Award className="h-4 w-4 text-orange-600" />
-              <span className="text-xs font-medium text-orange-800">Best Month</span>
+              <Award className="h-4 w-4 text-orange-600 dark:text-orange-400" />
+              <span className="text-xs font-medium text-orange-800 dark:text-orange-200">Best Month</span>
             </div>
-            <p className="text-sm font-bold text-orange-900">{bestGrowthMonth.month}</p>
+            <p className="text-sm font-bold text-orange-900 dark:text-orange-100">{bestGrowthMonth.month}</p>
           </div>
         </div>
       </CardHeader>
@@ -60,15 +60,15 @@ export const AudienceGrowthChart: React.FC = () => {
         <div className="h-80 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={audienceGrowthData} margin={{ top: 20, right: 20, left: 20, bottom: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+              <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
               <XAxis 
                 dataKey="month" 
-                stroke="#64748b" 
+                stroke="hsl(var(--muted-foreground))" 
                 fontSize={11}
                 tickMargin={8}
               />
               <YAxis 
-                stroke="#64748b" 
+                stroke="hsl(var(--muted-foreground))" 
                 fontSize={11}
                 tickMargin={8}
                 width={60}
@@ -78,28 +78,28 @@ export const AudienceGrowthChart: React.FC = () => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
-                        <h3 className="font-semibold text-gray-900 mb-2">{label} Growth</h3>
+                      <div className="bg-card p-4 rounded-lg shadow-lg border border-border">
+                        <h3 className="font-semibold text-foreground mb-2">{label} Growth</h3>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Total Subscribers:</span>
-                            <span className="font-semibold">{data.subscribers.toLocaleString()}</span>
+                            <span className="text-muted-foreground">Total Subscribers:</span>
+                            <span className="font-semibold text-foreground">{data.subscribers.toLocaleString()}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-green-600">New Subscribers:</span>
-                            <span className="font-semibold text-green-600">+{data.newSubscribers.toLocaleString()}</span>
+                            <span className="text-green-600 dark:text-green-400">New Subscribers:</span>
+                            <span className="font-semibold text-green-600 dark:text-green-400">+{data.newSubscribers.toLocaleString()}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-red-600">Unsubscribes:</span>
-                            <span className="font-semibold text-red-600">-{data.unsubscribes}</span>
+                            <span className="text-red-600 dark:text-red-400">Unsubscribes:</span>
+                            <span className="font-semibold text-red-600 dark:text-red-400">-{data.unsubscribes}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-blue-600">Net Growth:</span>
-                            <span className="font-semibold text-blue-600">+{data.netGrowth}</span>
+                            <span className="text-blue-600 dark:text-blue-400">Net Growth:</span>
+                            <span className="font-semibold text-blue-600 dark:text-blue-400">+{data.netGrowth}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-purple-600">Engagement Rate:</span>
-                            <span className="font-semibold text-purple-600">{data.engagementRate}%</span>
+                            <span className="text-purple-600 dark:text-purple-400">Engagement Rate:</span>
+                            <span className="font-semibold text-purple-600 dark:text-purple-400">{data.engagementRate}%</span>
                           </div>
                         </div>
                       </div>
@@ -127,59 +127,59 @@ export const AudienceGrowthChart: React.FC = () => {
         <div className="mt-4 space-y-4">
           {/* Monthly Comparison */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-green-50 rounded-lg p-4 border border-green-100">
+            <div className="bg-green-50 dark:bg-green-950/30 rounded-lg p-4 border border-green-100 dark:border-green-900/50">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="text-sm font-semibold text-green-900">This Month</h4>
-                <div className="flex items-center text-xs font-medium text-green-700 bg-green-100 px-2 py-1 rounded-full">
+                <h4 className="text-sm font-semibold text-green-900 dark:text-green-100">This Month</h4>
+                <div className="flex items-center text-xs font-medium text-green-700 dark:text-green-300 bg-green-100 dark:bg-green-900/50 px-2 py-1 rounded-full">
                   <UserPlus className="h-3 w-3 mr-1" />
                   +{currentMonth.netGrowth}
                 </div>
               </div>
               <div className="space-y-1 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-green-700">New:</span>
-                  <span className="font-semibold text-green-900">+{currentMonth.newSubscribers}</span>
+                  <span className="text-green-700 dark:text-green-300">New:</span>
+                  <span className="font-semibold text-green-900 dark:text-green-100">+{currentMonth.newSubscribers}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-green-700">Churned:</span>
-                  <span className="font-semibold text-green-900">-{currentMonth.unsubscribes}</span>
+                  <span className="text-green-700 dark:text-green-300">Churned:</span>
+                  <span className="font-semibold text-green-900 dark:text-green-100">-{currentMonth.unsubscribes}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-green-700">Growth Rate:</span>
-                  <span className="font-semibold text-green-900">{currentMonth.growthRate}%</span>
+                  <span className="text-green-700 dark:text-green-300">Growth Rate:</span>
+                  <span className="font-semibold text-green-900 dark:text-green-100">{currentMonth.growthRate}%</span>
                 </div>
               </div>
             </div>
             
-            <div className="bg-blue-50 rounded-lg p-4 border border-blue-100">
+            <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-4 border border-blue-100 dark:border-blue-900/50">
               <div className="flex items-center justify-between mb-2">
-                <h4 className="text-sm font-semibold text-blue-900">6-Month Avg</h4>
-                <div className="flex items-center text-xs font-medium text-blue-700 bg-blue-100 px-2 py-1 rounded-full">
+                <h4 className="text-sm font-semibold text-blue-900 dark:text-blue-100">6-Month Avg</h4>
+                <div className="flex items-center text-xs font-medium text-blue-700 dark:text-blue-300 bg-blue-100 dark:bg-blue-900/50 px-2 py-1 rounded-full">
                   <TrendingUp className="h-3 w-3 mr-1" />
                   {avgGrowthRate}%
                 </div>
               </div>
               <div className="space-y-1 text-sm">
                 <div className="flex justify-between">
-                  <span className="text-blue-700">Total Growth:</span>
-                  <span className="font-semibold text-blue-900">+{totalGrowthLastSixMonths.toLocaleString()}</span>
+                  <span className="text-blue-700 dark:text-blue-300">Total Growth:</span>
+                  <span className="font-semibold text-blue-900 dark:text-blue-100">+{totalGrowthLastSixMonths.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-blue-700">Avg Engagement:</span>
-                  <span className="font-semibold text-blue-900">{avgEngagementRate}%</span>
+                  <span className="text-blue-700 dark:text-blue-300">Avg Engagement:</span>
+                  <span className="font-semibold text-blue-900 dark:text-blue-100">{avgEngagementRate}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-blue-700">Active Users:</span>
-                  <span className="font-semibold text-blue-900">{currentMonth.activeUsers.toLocaleString()}</span>
+                  <span className="text-blue-700 dark:text-blue-300">Active Users:</span>
+                  <span className="font-semibold text-blue-900 dark:text-blue-100">{currentMonth.activeUsers.toLocaleString()}</span>
                 </div>
               </div>
             </div>
           </div>
           
           {/* Growth Trend Analysis */}
-          <div className="p-4 bg-gray-50 rounded-lg">
-            <h4 className="text-sm font-semibold text-gray-900 mb-2">Growth Insights</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-gray-600">
+          <div className="p-4 bg-muted/50 rounded-lg border border-border">
+            <h4 className="text-sm font-semibold text-foreground mb-2">Growth Insights</h4>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <TrendingUp className="h-3 w-3 text-green-500" />
                 <span>Growth rate increased {(currentMonth.growthRate - previousMonth.growthRate) > 0 ? '+' : ''}{(currentMonth.growthRate - previousMonth.growthRate).toFixed(1)}% vs last month</span>
