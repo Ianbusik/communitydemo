@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent } from "@/components/ui/chart";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, LabelList } from 'recharts';
 import { Mail, Eye, MousePointer, Star, TrendingUp, CheckCircle, Target, BarChart3 } from 'lucide-react';
 import { campaignData, chartConfig } from './DashboardData';
 import { Button } from "@/components/ui/button";
@@ -34,6 +34,26 @@ export const CampaignPerformanceChart: React.FC = () => {
       ...prev,
       [lineKey]: !prev[lineKey]
     }));
+  };
+
+  // Custom label component for displaying values on points
+  const CustomLabel = (props: any) => {
+    const { x, y, value, dataKey } = props;
+    if (!visibleLines[dataKey as keyof typeof visibleLines]) return null;
+    
+    return (
+      <text 
+        x={x} 
+        y={y - 8} 
+        fill={chartConfig[dataKey]?.color || '#666'} 
+        textAnchor="middle" 
+        dominantBaseline="middle"
+        fontSize={10}
+        fontWeight="500"
+      >
+        {value.toLocaleString()}
+      </text>
+    );
   };
 
   // Enhanced tooltip content
@@ -141,9 +161,9 @@ export const CampaignPerformanceChart: React.FC = () => {
         </div>
       </CardHeader>
       <CardContent className="p-6 pt-0">
-        <div className="h-80 w-full">
+        <div className="h-96 w-full">
           <ChartContainer config={chartConfig} className="h-full w-full">
-            <LineChart data={campaignData} margin={{ top: 20, right: 20, left: 20, bottom: 60 }}>
+            <LineChart data={campaignData} margin={{ top: 40, right: 20, left: 20, bottom: 60 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
               <XAxis 
                 dataKey="date" 
@@ -170,7 +190,9 @@ export const CampaignPerformanceChart: React.FC = () => {
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
-                />
+                >
+                  <LabelList content={<CustomLabel />} />
+                </Line>
               )}
               {visibleLines.delivered && (
                 <Line 
@@ -180,7 +202,9 @@ export const CampaignPerformanceChart: React.FC = () => {
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
-                />
+                >
+                  <LabelList content={<CustomLabel />} />
+                </Line>
               )}
               {visibleLines.opened && (
                 <Line 
@@ -190,7 +214,9 @@ export const CampaignPerformanceChart: React.FC = () => {
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
-                />
+                >
+                  <LabelList content={<CustomLabel />} />
+                </Line>
               )}
               {visibleLines.clicked && (
                 <Line 
@@ -200,7 +226,9 @@ export const CampaignPerformanceChart: React.FC = () => {
                   strokeWidth={3}
                   dot={{ r: 5, strokeWidth: 2, fill: "white" }}
                   activeDot={{ r: 7, strokeWidth: 2 }}
-                />
+                >
+                  <LabelList content={<CustomLabel />} />
+                </Line>
               )}
             </LineChart>
           </ChartContainer>
