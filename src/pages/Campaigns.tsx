@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
@@ -8,10 +9,10 @@ import { CampaignHeader } from "@/components/campaigns/CampaignHeader";
 import { CampaignStats } from "@/components/campaigns/CampaignStats";
 import { CampaignAnalytics } from "@/components/campaigns/CampaignAnalytics";
 import { MessagePreview } from "@/components/campaigns/MessagePreview";
+import { CampaignActions } from "@/components/campaigns/CampaignActions";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { UniversalSearch } from "@/components/UniversalSearch";
-import { Megaphone, Plus } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Megaphone } from 'lucide-react';
 import { useDocumentTitle } from "@/hooks/useDocumentTitle";
 
 const Campaigns = () => {
@@ -79,14 +80,14 @@ const Campaigns = () => {
           {/* Filter Toolbar */}
           <FilterToolbar />
 
-          {/* Empty State */}
+          {/* Empty State with Campaign Actions */}
           <EmptyState
             icon={<Megaphone className="h-12 w-12" />}
             title="No campaigns yet"
             description="Create your first campaign to start engaging with your community members through targeted messaging."
-            actionLabel="Create Campaign"
-            onAction={handleCreateCampaign}
-          />
+          >
+            <CampaignActions />
+          </EmptyState>
         </div>
       </div>
     </SidebarProvider>
