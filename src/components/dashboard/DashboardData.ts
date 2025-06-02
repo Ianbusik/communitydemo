@@ -185,3 +185,74 @@ export const messageTypesData = [
     trendValue: "+8.7%"
   }
 ];
+
+export const recentCampaigns = [
+  {
+    id: 1,
+    name: "Holiday Sale 2024",
+    subject: "🎄 Exclusive Holiday Deals - Up to 50% Off!",
+    status: "completed",
+    sent: "2 hours ago",
+    recipients: 15420,
+    delivered: 14890,
+    deliveryRate: "96.6%",
+    openRate: "32.4%",
+    clickRate: "8.7%",
+    bounces: 245,
+    unsubscribes: 18,
+    revenue: "$12,450",
+    segment: "All Subscribers",
+    trend: "up" as const
+  },
+  {
+    id: 2,
+    name: "Product Launch Alert",
+    subject: "🚀 Introducing Our Latest Innovation",
+    status: "completed",
+    sent: "1 day ago",
+    recipients: 8920,
+    delivered: 8654,
+    deliveryRate: "97.0%",
+    openRate: "28.9%",
+    clickRate: "6.2%",
+    bounces: 156,
+    unsubscribes: 12,
+    revenue: "$8,790",
+    segment: "Premium Users",
+    trend: "up" as const
+  },
+  {
+    id: 3,
+    name: "Weekly Newsletter",
+    subject: "📰 This Week's Top Stories & Updates",
+    status: "completed",
+    sent: "3 days ago",
+    recipients: 22100,
+    delivered: 21340,
+    deliveryRate: "96.6%",
+    openRate: "24.1%",
+    clickRate: "4.8%",
+    bounces: 398,
+    unsubscribes: 28,
+    revenue: "$3,420",
+    segment: "Newsletter Subscribers",
+    trend: "down" as const
+  },
+  {
+    id: 4,
+    name: "Flash Sale Alert",
+    subject: "⚡ 24-Hour Flash Sale - Limited Time Only!",
+    status: "completed",
+    sent: "5 days ago",
+    recipients: 12890,
+    delivered: 12456,
+    deliveryRate: "96.6%",
+    openRate: "41.2%",
+    clickRate: "12.3%",
+    bounces: 287,
+    unsubscribes: 15,
+    revenue: "$18,650",
+    segment: "VIP Customers",
+    trend: "up" as const
+  }
+];
